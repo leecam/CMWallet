@@ -113,7 +113,7 @@ fun createOpenID4VPResponse(
 
 class GetCredentialActivity : FragmentActivity() {
     private var request: ProviderGetCredentialRequest? = null
-
+    private val useBiometric = false
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.d(TAG, "Got activity result from issuance")
@@ -216,7 +216,17 @@ class GetCredentialActivity : FragmentActivity() {
                         selectedId,
                         origin
                     )
+                    if(!useBiometric) {
+                        PendingIntentHandler.setGetCredentialResponse(
+                            resultData, GetCredentialResponse(
+                                DigitalCredential(response.responseJson)
+                            )
+                        )
 
+                        setResult(RESULT_OK, resultData)
+                        finish()
+                        return
+                    }
                     val biometricPrompt = BiometricPrompt(
                         this@GetCredentialActivity,
                         object : BiometricPrompt.AuthenticationCallback() {
