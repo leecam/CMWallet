@@ -133,8 +133,16 @@ int main() {
                 } else {
                     char *title = cJSON_GetStringValue(cJSON_GetObjectItem(c, "title"));
                     char *subtitle = cJSON_GetStringValue(cJSON_GetObjectItem(c, "subtitle"));
+                    cJSON* icon = cJSON_GetObjectItem(c, "icon");
+                    int icon_start = (int)(cJSON_GetNumberValue(cJSON_GetObjectItem(icon, "start")));
+                    int icon_len = (int)(cJSON_GetNumberValue(cJSON_GetObjectItem(icon, "length")));
                     matched = 1;
-                    AddStringIdEntry(id, NULL, 0, title, subtitle, NULL, NULL);
+                    if (icon_len > 0) {
+                        AddStringIdEntry(id, creds_blob + icon_start, icon_len, title, subtitle, NULL, NULL);
+                    } else {
+                        AddStringIdEntry(id, NULL, 0, title, subtitle, NULL, NULL);
+                    }
+                    
                     cJSON *matched_claim_names = cJSON_GetObjectItem(c, "matched_claim_names");
                     cJSON *claim;
                     cJSON_ArrayForEach(claim, matched_claim_names) {
