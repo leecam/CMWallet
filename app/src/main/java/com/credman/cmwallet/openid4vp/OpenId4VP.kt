@@ -118,15 +118,27 @@ class OpenId4VP(val request: String) {
     }
 
     fun getHandover(origin: String): List<Any> {
+        /**
+         * Shape of `OpenID4VPDCAPIHandover[0]`
+         *
+         * See https://openid.net/specs/openid-4-verifiable-presentations-1_0-24.html#appendix-B.3.4.1
+         */
+        val oid4vpHandoverIdentifier = "OpenID4VPDCAPIHandover";
+
+        /**
+         * Shape of `OpenID4VPDCAPIHandoverInfo`
+         *
+         * See https://openid.net/specs/openid-4-verifiable-presentations-1_0-24.html#appendix-B.3.4.1
+         */
         val handoverData = listOf(
+            origin,
             clientId,
-            nonce,
-            origin
+            nonce
         )
 
         val md = MessageDigest.getInstance("SHA-256")
         return listOf(
-            "OID4VPDCAPIHandover",
+            oid4vpHandoverIdentifier,
             md.digest(cborEncode(CborTag(24, cborEncode(handoverData))))
         )
     }
