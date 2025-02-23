@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.jose4j)
     implementation(libs.tink.android)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)

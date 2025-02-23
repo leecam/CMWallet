@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.credentials.CreateCredentialRequest
@@ -24,7 +24,6 @@ import com.credman.cmwallet.CmWalletApplication
 import com.credman.cmwallet.CmWalletApplication.Companion.TAG
 import com.credman.cmwallet.CmWalletApplication.Companion.computeClientId
 import com.credman.cmwallet.createcred.CreateCredentialActivity
-import com.credman.cmwallet.createcred.CreateCredentialViewModel
 import com.credman.cmwallet.data.model.CredentialItem
 import com.credman.cmwallet.data.model.CredentialKeySoftware
 import com.credman.cmwallet.decodeBase64UrlNoPadding
@@ -40,9 +39,32 @@ import com.credman.cmwallet.openid4vp.OpenId4VP
 import com.credman.cmwallet.openid4vp.OpenId4VPMatchedCredential
 import com.credman.cmwallet.openid4vp.OpenId4VPMatchedMDocClaims
 import com.credman.cmwallet.toBase64UrlNoPadding
+import com.credman.cmwallet.toJWK
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import org.jose4j.jwe.ContentEncryptionAlgorithmIdentifiers
+import org.jose4j.jwe.JsonWebEncryption
+import org.jose4j.jwe.KeyManagementAlgorithmIdentifiers
+import org.jose4j.jwe.kdf.ConcatKeyDerivationFunction
 import org.json.JSONObject
+import java.math.BigInteger
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import java.security.AlgorithmParameters
+import java.security.KeyFactory
+import java.security.KeyPairGenerator
+import java.security.SecureRandom
+import java.security.spec.ECGenParameterSpec
+import java.security.spec.ECParameterSpec
+import java.security.spec.ECPoint
+import java.security.spec.ECPublicKeySpec
+import javax.crypto.Cipher
+import javax.crypto.KeyAgreement
+import javax.crypto.SecretKey
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.SecretKeySpec
+
 
 fun createOpenID4VPResponse(
     openId4VPRequest: OpenId4VP,
@@ -99,6 +121,7 @@ fun createOpenID4VPResponse(
                 deviceNamespaces = deviceNamespaces
 
             )
+            // Encrypt response, if applicable
             val encodedDeviceResponse = deviceResponse.toBase64UrlNoPadding()
             vpToken.put(matchedCredential.dcqlId, encodedDeviceResponse)
         }
@@ -108,7 +131,92 @@ fun createOpenID4VPResponse(
 
     // Create the openid4vp result
     val responseJson = JSONObject()
-    responseJson.put("vp_token", vpToken)
+    if (openId4VPRequest.responseMode == "dc_api.jwt") {
+        // Encrypt response if applicable
+        val encryptionAgl = openId4VPRequest.clientMedtadata?.opt("authorization_encrypted_response_alg")
+        val encryptionEnc = openId4VPRequest.clientMedtadata?.opt("authorization_encrypted_response_enc")
+        val signAgl = openId4VPRequest.clientMedtadata?.opt("authorization_signed_response_alg")
+        val jwks = openId4VPRequest.clientMedtadata?.opt("jwks")
+        if (encryptionAgl != null && encryptionEnc != null && signAgl == null) {
+            require(encryptionAgl == "ECDH-ES" && encryptionEnc == "A128GCM") { "Unsupported encryption algorithm" }
+            val jwks = (jwks!! as JSONObject).getJSONArray("keys")
+            var encryptionJwk = jwks[0] as JSONObject
+            for (i in 0..<jwks.length()) {
+                val jwk = jwks[i] as JSONObject
+                if (jwk.has("use")
+                    && jwk["use"] == "enc"
+                    && encryptionJwk["kty"] == "EC"
+                    && encryptionJwk["crv"] == "P-256"
+                ) {
+                    encryptionJwk = jwk
+                }
+            }
+            val kid = encryptionJwk.optString("kid")
+            val x = encryptionJwk.getString("x")
+            val y = encryptionJwk.getString("y")
+            val kf = KeyFactory.getInstance("EC")
+            val parameters = AlgorithmParameters.getInstance("EC")
+            parameters.init(ECGenParameterSpec("secp256r1"))
+            val publicKey = kf.generatePublic(
+                ECPublicKeySpec(
+                    ECPoint(
+                        BigInteger(1, x.decodeBase64UrlNoPadding()),
+                        BigInteger(1, y.decodeBase64UrlNoPadding())
+                    ),
+                    parameters.getParameterSpec(ECParameterSpec::class.java)
+                )
+            )
+            val kpg =  KeyPairGenerator.getInstance("EC")
+            kpg.initialize(ECGenParameterSpec("secp256r1"))
+            val kp = kpg.genKeyPair()
+            val keyAgreement = KeyAgreement.getInstance("ECDH")
+            keyAgreement.init(kp.private)
+            keyAgreement.doPhase(publicKey, true)
+            val sharedSecret = keyAgreement.generateSecret()
+            val concatKdf = ConcatKeyDerivationFunction("SHA-256")
+
+            val algOctets = (encryptionEnc as String).toByteArray()
+            val buffer = ByteBuffer.allocate(Int.SIZE_BYTES)
+            buffer.order(ByteOrder.BIG_ENDIAN)
+            buffer.putInt(algOctets.size)
+            val partyUInfo = "CMWallet"
+            val partyVInfo = "RP"
+
+            val derivedKey = concatKdf.kdf(
+                sharedSecret,
+                128,
+                buffer.array() + algOctets,
+                partyUInfo.toByteArray(),
+                partyVInfo.toByteArray(),
+                ByteArray(0),
+                ByteArray(0)
+            )
+            val sks = SecretKeySpec(derivedKey, "AES")
+            val aesCipher = Cipher.getInstance("AES/GCM/NoPadding")
+            val iv = ByteArray(12)
+            SecureRandom().nextBytes(iv)
+            val ivEncoded = iv.toBase64UrlNoPadding()
+            aesCipher.init(Cipher.ENCRYPT_MODE, sks, GCMParameterSpec(128, iv))
+            val encrypted = aesCipher.doFinal(vpToken.toString().toByteArray())
+            val ct = encrypted.slice(0 until (encrypted.size - 16)).toByteArray()
+            val ctEncoded = ct.toBase64UrlNoPadding()
+            val tag = encrypted.slice((encrypted.size - 16) until encrypted.size).toByteArray()
+            val tagEncoded = tag.toBase64UrlNoPadding()
+            val header = JSONObject()
+            header.put("apu", partyUInfo.toByteArray().toBase64UrlNoPadding())
+            header.put("apv", partyVInfo.toByteArray().toBase64UrlNoPadding())
+            header.put("alg", "ECDH-ES")
+            header.put("enc", "A128GCM")
+            header.put("epk", JSONObject(kp.public.toJWK().toString()))
+            val headerEncoded = header.toString().toByteArray().toBase64UrlNoPadding()
+            responseJson.put("vp_token", "${headerEncoded}..${ivEncoded}.${ctEncoded}.${tagEncoded}")
+        } else {
+            throw UnsupportedOperationException("Response should be signed and / or encrypted but it's not supported yet")
+        }
+    } else {
+        responseJson.put("vp_token", vpToken)
+    }
+    Log.d(TAG, responseJson.toString())
     return DigitalCredentialResult(
         responseJson = responseJson.toString(),
         authenticationTitle = authenticationTitle,

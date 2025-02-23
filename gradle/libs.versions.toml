@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.1"
+jose4j = "0.9.6"
 kotlin = "2.0.21"
 kotlinxSerializationJson = "1.7.3"
 ksp = "2.0.21-1.0.27"
@@ -27,6 +28,7 @@ androidx-registry-provider = { module = "androidx.credentials.registry:registry-
 androidx-registry-provider-play-services = { module = "androidx.credentials.registry:registry-provider-play-services", version.ref = "registryDigitalcredentialsMdoc" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+jose4j = { module = "org.bitbucket.b_c:jose4j", version.ref = "jose4j" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
