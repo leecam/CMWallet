@@ -4,15 +4,28 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.encodeToJsonElement
+import org.jose4j.jwe.kdf.ConcatKeyDerivationFunction
+import org.json.JSONObject
 import java.math.BigInteger
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import java.security.AlgorithmParameters
 import java.security.KeyFactory
+import java.security.KeyPairGenerator
 import java.security.PrivateKey
 import java.security.PublicKey
+import java.security.SecureRandom
 import java.security.Signature
 import java.security.interfaces.ECPublicKey
+import java.security.spec.ECGenParameterSpec
+import java.security.spec.ECParameterSpec
+import java.security.spec.ECPoint
+import java.security.spec.ECPublicKeySpec
 import java.security.spec.PKCS8EncodedKeySpec
+import javax.crypto.Cipher
+import javax.crypto.KeyAgreement
+import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.SecretKeySpec
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -131,4 +144,67 @@ fun convertDerToRaw(signature: ByteArray): ByteArray {
     signature.copyInto(ret, 32 + sPad, sOffset, sOffset + sLen)
 
     return ret
+}
+
+/** ECDH-ES key agreement, A128GCM encryption, JWE Compact Serialization */
+fun jweSerialization(recipientKeyJwk: JSONObject, plainText: String): String {
+    val kid = recipientKeyJwk.optString("kid")
+    val x = recipientKeyJwk.getString("x")
+    val y = recipientKeyJwk.getString("y")
+    val kf = KeyFactory.getInstance("EC")
+    val parameters = AlgorithmParameters.getInstance("EC")
+    parameters.init(ECGenParameterSpec("secp256r1"))
+    val publicKey = kf.generatePublic(
+        ECPublicKeySpec(
+            ECPoint(
+                BigInteger(1, x.decodeBase64UrlNoPadding()),
+                BigInteger(1, y.decodeBase64UrlNoPadding())
+            ),
+            parameters.getParameterSpec(ECParameterSpec::class.java)
+        )
+    )
+    val kpg =  KeyPairGenerator.getInstance("EC")
+    kpg.initialize(ECGenParameterSpec("secp256r1"))
+    val kp = kpg.genKeyPair()
+    val partyUInfo = ByteArray(0)
+    val partyVInfo = ByteArray(0)
+    val header = JSONObject()
+    header.put("apu", partyUInfo.toBase64UrlNoPadding())
+    header.put("apv", partyVInfo.toBase64UrlNoPadding())
+    header.put("alg", "ECDH-ES")
+    header.put("enc", "A128GCM")
+    header.put("epk", JSONObject(kp.public.toJWK().toString()))
+    val headerEncoded = header.toString().toByteArray().toBase64UrlNoPadding()
+
+    val keyAgreement = KeyAgreement.getInstance("ECDH")
+    keyAgreement.init(kp.private)
+    keyAgreement.doPhase(publicKey, true)
+    val sharedSecret = keyAgreement.generateSecret()
+    val concatKdf = ConcatKeyDerivationFunction("SHA-256")
+
+    val algOctets = "A128GCM".toByteArray()
+    val keydatalen = 128
+
+    val derivedKey = concatKdf.kdf(
+        sharedSecret,
+        keydatalen,
+        intToBigEndianByteArray(algOctets.size) + algOctets,
+        intToBigEndianByteArray(partyUInfo.size) + partyUInfo,
+        intToBigEndianByteArray(partyVInfo.size) + partyVInfo,
+        intToBigEndianByteArray(keydatalen),
+        ByteArray(0)
+    )
+    val sks = SecretKeySpec(derivedKey, "AES")
+    val aesCipher = Cipher.getInstance("AES/GCM/NoPadding")
+    val iv = ByteArray(12)
+    SecureRandom().nextBytes(iv)
+    val ivEncoded = iv.toBase64UrlNoPadding()
+    aesCipher.init(Cipher.ENCRYPT_MODE, sks, GCMParameterSpec(128, iv))
+    aesCipher.updateAAD(headerEncoded.toByteArray())
+    val encrypted = aesCipher.doFinal(plainText.toByteArray())
+    val ct = encrypted.slice(0 until (encrypted.size - 16)).toByteArray()
+    val ctEncoded = ct.toBase64UrlNoPadding()
+    val tag = encrypted.slice((encrypted.size - 16) until encrypted.size).toByteArray()
+    val tagEncoded = tag.toBase64UrlNoPadding()
+    return "${headerEncoded}..${ivEncoded}.${ctEncoded}.${tagEncoded}"
 }
