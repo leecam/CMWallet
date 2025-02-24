@@ -41,6 +41,7 @@ import com.credman.cmwallet.openid4vp.OpenId4VPMatchedCredential
 import com.credman.cmwallet.openid4vp.OpenId4VPMatchedMDocClaims
 import com.credman.cmwallet.toBase64UrlNoPadding
 import com.credman.cmwallet.toJWK
+import com.google.android.gms.identitycredentials.IntentHelper
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.jose4j.jwe.kdf.ConcatKeyDerivationFunction
@@ -200,7 +201,7 @@ fun createOpenID4VPResponse(
             val ivEncoded = iv.toBase64UrlNoPadding()
             aesCipher.init(Cipher.ENCRYPT_MODE, sks, GCMParameterSpec(128, iv))
             aesCipher.updateAAD(headerEncoded.toByteArray())
-            val encrypted = aesCipher.doFinal(vpToken.toString().toByteArray())
+            val encrypted = aesCipher.doFinal(responseJson.toString().toByteArray())
             val ct = encrypted.slice(0 until (encrypted.size - 16)).toByteArray()
             val ctEncoded = ct.toBase64UrlNoPadding()
             val tag = encrypted.slice((encrypted.size - 16) until encrypted.size).toByteArray()
@@ -340,18 +341,19 @@ class GetCredentialActivity : FragmentActivity() {
                             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                                 Log.d(TAG, "onAuthenticationSucceeded")
 
-                                PendingIntentHandler.setGetCredentialResponse(
-                                    resultData, GetCredentialResponse(
-                                        // This is a temporary solution until Chrome migrate to use
-                                        // the top level DC DigitalCredential json structure.
-                                        // Long term, this should be replaced by a simple
-                                        // `DigitalCredential(response.responseJson)` call.
-                                        CustomCredential(
+                                // This is a temporary solution until Chrome migrate to use
+                                // the top level DC DigitalCredential json structure.
+                                // Long term, this should be replaced by a simple
+                                // `PendingIntentHandler.setGetCredentialResponse(intent, DigitalCredential(response.responseJson))` call.
+                                IntentHelper.setGetCredentialResponse(
+                                    resultData,
+                                    com.google.android.gms.identitycredentials.GetCredentialResponse(
+                                        com.google.android.gms.identitycredentials.Credential(
                                             DigitalCredential.TYPE_DIGITAL_CREDENTIAL,
                                             Bundle().apply {
-                                                putString(
-                                                    "androidx.credentials.BUNDLE_KEY_REQUEST_JSON",
-                                                    response.responseJson
+                                                putByteArray(
+                                                    CHROME_RESPONSE_TOKEN_KEY_LEGACY,
+                                                    response.responseJson.toByteArray()
                                                 )
                                             }
                                         )
@@ -477,3 +479,4 @@ fun BiometricPrompt.PromptInfo.Builder.setStrongOrDeviceAuthenticators(context: 
     return this
 }
 
+internal const val CHROME_RESPONSE_TOKEN_KEY_LEGACY = "identityToken"
