@@ -9,6 +9,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.credentials.CreateCredentialRequest
 import androidx.credentials.CreateCustomCredentialRequest
+import androidx.credentials.CustomCredential
 import androidx.credentials.DigitalCredential
 import androidx.credentials.ExperimentalDigitalCredentialApi
 import androidx.credentials.GetCredentialResponse
@@ -125,8 +126,8 @@ fun createOpenID4VPResponse(
     }
 
     // Create the openid4vp result
-    val responseJson = JSONObject()
-    if (openId4VPRequest.responseMode == "dc_api.jwt") {
+    val responseJson = JSONObject().put("vp_token", vpToken).toString()
+    val response = if (openId4VPRequest.responseMode == "dc_api.jwt") {
         // Encrypt response if applicable
         val encryptionAgl = openId4VPRequest.clientMedtadata?.opt("authorization_encrypted_response_alg")
         val encryptionEnc = openId4VPRequest.clientMedtadata?.opt("authorization_encrypted_response_enc")
@@ -204,16 +205,16 @@ fun createOpenID4VPResponse(
             val ctEncoded = ct.toBase64UrlNoPadding()
             val tag = encrypted.slice((encrypted.size - 16) until encrypted.size).toByteArray()
             val tagEncoded = tag.toBase64UrlNoPadding()
-            responseJson.put("vp_token", "${headerEncoded}..${ivEncoded}.${ctEncoded}.${tagEncoded}")
+            "${headerEncoded}..${ivEncoded}.${ctEncoded}.${tagEncoded}"
         } else {
             throw UnsupportedOperationException("Response should be signed and / or encrypted but it's not supported yet")
         }
     } else {
-        responseJson.put("vp_token", vpToken)
+        responseJson
     }
-    Log.d(TAG, responseJson.toString())
+    Log.d(TAG, "Returning $response")
     return DigitalCredentialResult(
-        responseJson = responseJson.toString(),
+        responseJson = response,
         authenticationTitle = authenticationTitle,
         authenticationSubtitle = authenticationSubtitle,
     )
@@ -341,7 +342,19 @@ class GetCredentialActivity : FragmentActivity() {
 
                                 PendingIntentHandler.setGetCredentialResponse(
                                     resultData, GetCredentialResponse(
-                                        DigitalCredential(response.responseJson)
+                                        // This is a temporary solution until Chrome migrate to use
+                                        // the top level DC DigitalCredential json structure.
+                                        // Long term, this should be replaced by a simple
+                                        // `DigitalCredential(response.responseJson)` call.
+                                        CustomCredential(
+                                            DigitalCredential.TYPE_DIGITAL_CREDENTIAL,
+                                            Bundle().apply {
+                                                putString(
+                                                    "androidx.credentials.BUNDLE_KEY_REQUEST_JSON",
+                                                    response.responseJson
+                                                )
+                                            }
+                                        )
                                     )
                                 )
 
