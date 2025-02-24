@@ -164,6 +164,16 @@ fun createOpenID4VPResponse(
             val kpg =  KeyPairGenerator.getInstance("EC")
             kpg.initialize(ECGenParameterSpec("secp256r1"))
             val kp = kpg.genKeyPair()
+            val partyUInfo = "CMWallet".toByteArray()
+            val partyVInfo = "RP".toByteArray()
+            val header = JSONObject()
+            header.put("apu", partyUInfo.toBase64UrlNoPadding())
+            header.put("apv", partyVInfo.toBase64UrlNoPadding())
+            header.put("alg", "ECDH-ES")
+            header.put("enc", "A128GCM")
+            header.put("epk", JSONObject(kp.public.toJWK().toString()))
+            val headerEncoded = header.toString().toByteArray().toBase64UrlNoPadding()
+
             val keyAgreement = KeyAgreement.getInstance("ECDH")
             keyAgreement.init(kp.private)
             keyAgreement.doPhase(publicKey, true)
@@ -171,8 +181,6 @@ fun createOpenID4VPResponse(
             val concatKdf = ConcatKeyDerivationFunction("SHA-256")
 
             val algOctets = (encryptionEnc as String).toByteArray()
-            val partyUInfo = "CMWallet".toByteArray()
-            val partyVInfo = "RP".toByteArray()
             val keydatalen = 128
 
             val derivedKey = concatKdf.kdf(
@@ -190,18 +198,12 @@ fun createOpenID4VPResponse(
             SecureRandom().nextBytes(iv)
             val ivEncoded = iv.toBase64UrlNoPadding()
             aesCipher.init(Cipher.ENCRYPT_MODE, sks, GCMParameterSpec(128, iv))
+            aesCipher.updateAAD(headerEncoded.toByteArray())
             val encrypted = aesCipher.doFinal(vpToken.toString().toByteArray())
             val ct = encrypted.slice(0 until (encrypted.size - 16)).toByteArray()
             val ctEncoded = ct.toBase64UrlNoPadding()
             val tag = encrypted.slice((encrypted.size - 16) until encrypted.size).toByteArray()
             val tagEncoded = tag.toBase64UrlNoPadding()
-            val header = JSONObject()
-            header.put("apu", partyUInfo.toBase64UrlNoPadding())
-            header.put("apv", partyVInfo.toBase64UrlNoPadding())
-            header.put("alg", "ECDH-ES")
-            header.put("enc", "A128GCM")
-            header.put("epk", JSONObject(kp.public.toJWK().toString()))
-            val headerEncoded = header.toString().toByteArray().toBase64UrlNoPadding()
             responseJson.put("vp_token", "${headerEncoded}..${ivEncoded}.${ctEncoded}.${tagEncoded}")
         } else {
             throw UnsupportedOperationException("Response should be signed and / or encrypted but it's not supported yet")
