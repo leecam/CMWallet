@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -28,6 +27,7 @@ import com.credman.cmwallet.data.model.CredentialItem
 import com.credman.cmwallet.data.model.CredentialKeySoftware
 import com.credman.cmwallet.decodeBase64UrlNoPadding
 import com.credman.cmwallet.getcred.GetCredentialActivity.DigitalCredentialResult
+import com.credman.cmwallet.intToBigEndianByteArray
 import com.credman.cmwallet.loadECPrivateKey
 import com.credman.cmwallet.mdoc.createSessionTranscript
 import com.credman.cmwallet.mdoc.filterIssuerSigned
@@ -42,9 +42,6 @@ import com.credman.cmwallet.toBase64UrlNoPadding
 import com.credman.cmwallet.toJWK
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import org.jose4j.jwe.ContentEncryptionAlgorithmIdentifiers
-import org.jose4j.jwe.JsonWebEncryption
-import org.jose4j.jwe.KeyManagementAlgorithmIdentifiers
 import org.jose4j.jwe.kdf.ConcatKeyDerivationFunction
 import org.json.JSONObject
 import java.math.BigInteger
@@ -60,8 +57,6 @@ import java.security.spec.ECPoint
 import java.security.spec.ECPublicKeySpec
 import javax.crypto.Cipher
 import javax.crypto.KeyAgreement
-import javax.crypto.SecretKey
-import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
@@ -176,19 +171,17 @@ fun createOpenID4VPResponse(
             val concatKdf = ConcatKeyDerivationFunction("SHA-256")
 
             val algOctets = (encryptionEnc as String).toByteArray()
-            val buffer = ByteBuffer.allocate(Int.SIZE_BYTES)
-            buffer.order(ByteOrder.BIG_ENDIAN)
-            buffer.putInt(algOctets.size)
-            val partyUInfo = "CMWallet"
-            val partyVInfo = "RP"
+            val partyUInfo = "CMWallet".toByteArray()
+            val partyVInfo = "RP".toByteArray()
+            val keydatalen = 128
 
             val derivedKey = concatKdf.kdf(
                 sharedSecret,
-                128,
-                buffer.array() + algOctets,
-                partyUInfo.toByteArray(),
-                partyVInfo.toByteArray(),
-                ByteArray(0),
+                keydatalen,
+                intToBigEndianByteArray(algOctets.size) + algOctets,
+                intToBigEndianByteArray(partyUInfo.size) + partyUInfo,
+                intToBigEndianByteArray(partyVInfo.size) + partyVInfo,
+                intToBigEndianByteArray(keydatalen),
                 ByteArray(0)
             )
             val sks = SecretKeySpec(derivedKey, "AES")
@@ -203,8 +196,8 @@ fun createOpenID4VPResponse(
             val tag = encrypted.slice((encrypted.size - 16) until encrypted.size).toByteArray()
             val tagEncoded = tag.toBase64UrlNoPadding()
             val header = JSONObject()
-            header.put("apu", partyUInfo.toByteArray().toBase64UrlNoPadding())
-            header.put("apv", partyVInfo.toByteArray().toBase64UrlNoPadding())
+            header.put("apu", partyUInfo.toBase64UrlNoPadding())
+            header.put("apv", partyVInfo.toBase64UrlNoPadding())
             header.put("alg", "ECDH-ES")
             header.put("enc", "A128GCM")
             header.put("epk", JSONObject(kp.public.toJWK().toString()))

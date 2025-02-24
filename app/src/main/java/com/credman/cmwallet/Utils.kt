@@ -5,6 +5,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.encodeToJsonElement
 import java.math.BigInteger
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.security.KeyFactory
 import java.security.PrivateKey
 import java.security.PublicKey
@@ -18,6 +20,13 @@ fun loadECPrivateKey(keyDer: ByteArray): PrivateKey {
     val devicePrivateKeySpec = PKCS8EncodedKeySpec(keyDer)
     val kf = KeyFactory.getInstance("EC")
     return kf.generatePrivate(devicePrivateKeySpec)!!
+}
+
+fun intToBigEndianByteArray(source: Int): ByteArray {
+    val buffer = ByteBuffer.allocate(Int.SIZE_BYTES)
+    buffer.order(ByteOrder.BIG_ENDIAN)
+    buffer.putInt(source)
+    return buffer.array()
 }
 
 fun BigInteger.toFixedByteArray(requiredLength: Int): ByteArray {
