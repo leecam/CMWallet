@@ -520,18 +520,17 @@
           "locale": "en-US"
         }
       ],
-      "claims": {
-        "com.fido.phone.1": {
-          "phone_number": {
-            "display": [
-              {
-                "name": "Phone Number",
-                "locale": "en-US"
-              }
-            ]
-          }
+      "claims": [
+        {
+          "path": ["com.fido.phone.1", "phone_number"],
+          "display": [
+            {
+              "name": "Phone Number",
+              "locale": "en-US"
+            }
+          ]
         }
-      }
+      ]
     },
     "displayData": {
       "title": "Verified Phone Number",
