@@ -1,9 +1,9 @@
 package com.credman.cmwallet.openid4vp
 
 import android.util.Base64
-import com.credman.cmwallet.cbor.CborTag
 import com.credman.cmwallet.cbor.cborEncode
 import com.credman.cmwallet.data.model.CredentialItem
+import com.credman.cmwallet.jweSerialization
 import org.json.JSONObject
 import java.security.MessageDigest
 
@@ -14,25 +14,27 @@ data class TransactionData(
     val data: JSONObject
 )
 
-class OpenId4VP(val request: String) {
+class OpenId4VP(val request: String, val clientId: String) {
     val requestJson: JSONObject = JSONObject(request)
 
     val nonce: String
-    val clientId: String // TODO: parse out the scheme
+
     val dcqlQuery: JSONObject
     val transactionData: List<TransactionData>
     val issuanceOffer: JSONObject?
+    val clientMedtadata: JSONObject?
+    val responseMode: String?
 
     init {
         // Parse required params
-        require(requestJson.has("client_id")) { "Authorization Request must contain a client_id" }
         require(requestJson.has("nonce")) { "Authorization Request must contain a nonce" }
         require(requestJson.has("dcql_query")) { "Authorization Request must contain a dcql_query" }
 
-        clientId = requestJson.getString("client_id")
         nonce = requestJson.getString("nonce")
         dcqlQuery = requestJson.getJSONObject("dcql_query")
         issuanceOffer = requestJson.optJSONObject("offer")
+        clientMedtadata = requestJson.optJSONObject("client_metadata")
+        responseMode = requestJson.optString("response_mode")
 
         val transactionDataJson = requestJson.optJSONArray("transaction_data")
         if (transactionDataJson != null) {
@@ -139,8 +141,41 @@ class OpenId4VP(val request: String) {
         val md = MessageDigest.getInstance("SHA-256")
         return listOf(
             oid4vpHandoverIdentifier,
-            md.digest(cborEncode(CborTag(24, cborEncode(handoverData))))
+            md.digest(cborEncode(handoverData))
         )
+    }
+
+    fun generateResponse(vpToken: JSONObject): String {
+        val responseJson = JSONObject().put("vp_token", vpToken).toString()
+        val response = if (responseMode == "dc_api.jwt") {
+            // Encrypt response if applicable
+            val encryptionAgl = clientMedtadata?.opt("authorization_encrypted_response_alg")
+            val encryptionEnc = clientMedtadata?.opt("authorization_encrypted_response_enc")
+            val signAgl = clientMedtadata?.opt("authorization_signed_response_alg")
+            val jwks = clientMedtadata?.opt("jwks")
+            if (encryptionAgl != null && encryptionEnc != null && signAgl == null) {
+                require(encryptionAgl == "ECDH-ES" && encryptionEnc == "A128GCM") { "Unsupported encryption algorithm" }
+                val jwks = (jwks!! as JSONObject).getJSONArray("keys")
+                var encryptionJwk = jwks[0] as JSONObject
+                for (i in 0..<jwks.length()) {
+                    val jwk = jwks[i] as JSONObject
+                    if (jwk.has("use")
+                        && jwk["use"] == "enc"
+                        && encryptionJwk["kty"] == "EC"
+                        && encryptionJwk["crv"] == "P-256"
+                    ) {
+                        encryptionJwk = jwk
+                    }
+                }
+                val jwe = jweSerialization(encryptionJwk, responseJson)
+                JSONObject().put("response", jwe).toString()
+            } else {
+                throw UnsupportedOperationException("Response should be signed and / or encrypted but it's not supported yet")
+            }
+        } else {
+            responseJson
+        }
+        return response
     }
 
     companion object {

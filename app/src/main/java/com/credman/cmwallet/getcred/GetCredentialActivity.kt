@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.credentials.CreateCredentialRequest
@@ -22,8 +21,8 @@ import androidx.credentials.registry.provider.selectedEntryId
 import androidx.fragment.app.FragmentActivity
 import com.credman.cmwallet.CmWalletApplication
 import com.credman.cmwallet.CmWalletApplication.Companion.TAG
+import com.credman.cmwallet.CmWalletApplication.Companion.computeClientId
 import com.credman.cmwallet.createcred.CreateCredentialActivity
-import com.credman.cmwallet.createcred.CreateCredentialViewModel
 import com.credman.cmwallet.data.model.CredentialItem
 import com.credman.cmwallet.data.model.CredentialKeySoftware
 import com.credman.cmwallet.decodeBase64UrlNoPadding
@@ -33,14 +32,17 @@ import com.credman.cmwallet.mdoc.createSessionTranscript
 import com.credman.cmwallet.mdoc.filterIssuerSigned
 import com.credman.cmwallet.mdoc.generateDeviceResponse
 import com.credman.cmwallet.openid4vci.data.CredentialConfigurationMDoc
+import com.credman.cmwallet.openid4vci.data.CredentialConfigurationSdJwtVc
 import com.credman.cmwallet.openid4vci.data.CredentialConfigurationUnknownFormat
 import com.credman.cmwallet.openid4vp.OpenId4VP
 import com.credman.cmwallet.openid4vp.OpenId4VPMatchedCredential
 import com.credman.cmwallet.openid4vp.OpenId4VPMatchedMDocClaims
 import com.credman.cmwallet.toBase64UrlNoPadding
+import com.google.android.gms.identitycredentials.IntentHelper
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.json.JSONObject
+
 
 fun createOpenID4VPResponse(
     openId4VPRequest: OpenId4VP,
@@ -53,6 +55,9 @@ fun createOpenID4VPResponse(
     // Create the response
     val vpToken = JSONObject()
     when (selectedCredential.config) {
+        is CredentialConfigurationSdJwtVc -> {
+
+        }
         is CredentialConfigurationMDoc -> {
             val matchedClaims =
                 matchedCredential.matchedClaims as OpenId4VPMatchedMDocClaims
@@ -94,6 +99,7 @@ fun createOpenID4VPResponse(
                 deviceNamespaces = deviceNamespaces
 
             )
+            // Encrypt response, if applicable
             val encodedDeviceResponse = deviceResponse.toBase64UrlNoPadding()
             vpToken.put(matchedCredential.dcqlId, encodedDeviceResponse)
         }
@@ -102,10 +108,10 @@ fun createOpenID4VPResponse(
     }
 
     // Create the openid4vp result
-    val responseJson = JSONObject()
-    responseJson.put("vp_token", vpToken)
+    val response = openId4VPRequest.generateResponse(vpToken)
+    Log.d(TAG, "Returning $response")
     return DigitalCredentialResult(
-        responseJson = responseJson.toString(),
+        responseJson = response,
         authenticationTitle = authenticationTitle,
         authenticationSubtitle = authenticationSubtitle,
     )
@@ -154,7 +160,10 @@ class GetCredentialActivity : FragmentActivity() {
                     val digitalCredentialRequestOptions =
                         Json.decodeFromString<DigitalCredentialRequestOptions>(it.requestJson)
                     if (entryId == "ISSUANCE") {
-                        val openId4VPRequest = OpenId4VP(digitalCredentialRequestOptions.providers[0].request)
+                        val openId4VPRequest = OpenId4VP(
+                            digitalCredentialRequestOptions.providers[0].request,
+                            computeClientId(request.callingAppInfo)
+                        )
                         startActivityForResult(
                             Intent(this, CreateCredentialActivity::class.java).apply {
                                 val callingAppInfo = request.callingAppInfo
@@ -238,10 +247,13 @@ class GetCredentialActivity : FragmentActivity() {
                             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                                 Log.d(TAG, "onAuthenticationSucceeded")
 
+                                // This is a temporary solution until Chrome migrate to use
+                                // the top level DC DigitalCredential json structure.
+                                // Long term, this should be replaced by a simple
+                                // `PendingIntentHandler.setGetCredentialResponse(intent, DigitalCredential(response.responseJson))` call.
                                 PendingIntentHandler.setGetCredentialResponse(
-                                    resultData, GetCredentialResponse(
-                                        DigitalCredential(response.responseJson)
-                                    )
+                                    resultData,
+                                    GetCredentialResponse(DigitalCredential(response.responseJson))
                                 )
 
                                 setResult(RESULT_OK, resultData)
@@ -324,8 +336,8 @@ class GetCredentialActivity : FragmentActivity() {
             "processDigitalCredentialOption protocol ${provider.protocol}"
         )
         when (provider.protocol) {
-            "openid4vp1.0" -> {
-                val openId4VPRequest = OpenId4VP(provider.request)
+            "openid4vp" -> {
+                val openId4VPRequest = OpenId4VP(provider.request, computeClientId(request!!.callingAppInfo))
                 Log.i("GetCredentialActivity", "nonce ${openId4VPRequest.nonce}")
                 val matchedCredential =
                     openId4VPRequest.performQueryOnCredential(selectedCredential)
@@ -363,3 +375,4 @@ fun BiometricPrompt.PromptInfo.Builder.setStrongOrDeviceAuthenticators(context: 
     return this
 }
 
+internal const val CHROME_RESPONSE_TOKEN_KEY_LEGACY = "identityToken"

@@ -5,6 +5,7 @@ import com.credman.cmwallet.data.model.CredentialItem
 import com.credman.cmwallet.decodeBase64UrlNoPadding
 import com.credman.cmwallet.mdoc.MDoc
 import com.credman.cmwallet.openid4vci.data.CredentialConfigurationMDoc
+import com.credman.cmwallet.openid4vci.data.CredentialConfigurationSdJwtVc
 import com.credman.cmwallet.openid4vci.data.CredentialConfigurationUnknownFormat
 import org.json.JSONArray
 import org.json.JSONObject
@@ -46,6 +47,7 @@ fun performQueryOnCredential(
     if (claims == null) {
         Log.i("DCQL", "Matching without claims")
         when (selectedCredential.config) {
+            is CredentialConfigurationSdJwtVc -> TODO()
             is CredentialConfigurationMDoc -> {
                 val mdoc =
                     MDoc(selectedCredential.credentials.first().credential.decodeBase64UrlNoPadding())
@@ -66,14 +68,16 @@ fun performQueryOnCredential(
         if (claimSets == null) {
             Log.i("DCQL", "Matching without claim_sets")
             when (selectedCredential.config) {
+                is CredentialConfigurationSdJwtVc -> TODO()
                 is CredentialConfigurationMDoc -> {
                     val mdoc =
                         MDoc(selectedCredential.credentials.first().credential.decodeBase64UrlNoPadding())
                     val ret = mutableMapOf<String, MutableList<String>>()
                     for (claimIdx in 0 until claims.length()) {
                         val claim = claims.getJSONObject(claimIdx)!!
-                        val claimNamespace = claim.getString("namespace")
-                        val claimName = claim.getString("claim_name")
+                        val path = claim.getJSONArray("path")
+                        val claimNamespace = path.get(0)
+                        val claimName = path.getString(1)
 
                         mdoc.issuerSignedNamespaces.forEach { (namespace, elements) ->
                             if (namespace == claimNamespace) {

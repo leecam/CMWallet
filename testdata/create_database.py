@@ -6,10 +6,10 @@ from cryptography.x509 import load_pem_x509_certificates
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 
-issuer_cert_chain_file = open("testdata/issuer_cert.pem", "rb").read()
-issuer_cert_chain = load_pem_x509_certificates(issuer_cert_chain_file)
-issuer_private_key_file = open("testdata/issuer_private_key.pem", "rb").read()
-issuer_private_key = load_pem_private_key(issuer_private_key_file, None)
+ds_cert_chain_file = open("testdata/ds_cert.pem", "rb").read()
+ds_cert_chain = load_pem_x509_certificates(ds_cert_chain_file)
+ds_private_key_file = open("testdata/ds_private_key.pem", "rb").read()
+ds_private_key = load_pem_private_key(ds_private_key_file, None)
 
 database_in_json = open("testdata/database_in.json", "rb").read()
 database = json.loads(database_in_json)
@@ -19,7 +19,7 @@ for cred_id, cred in database.items():
         mdoc_credential = cred["credential"]
         doctype = mdoc_credential["docType"]
         print("Creating {}".format(doctype))
-        mdoc = create_mdoc(doctype, issuer_cert_chain, issuer_private_key)
+        mdoc = create_mdoc(doctype, ds_cert_chain, ds_private_key)
         for namespace, elements in mdoc_credential["nameSpaces"].items():
             for element, value in elements.items():
                 mdoc.add_data_item(namespace, element, value["value"])
