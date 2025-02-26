@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.credman.cmwallet.CmWalletApplication
 import com.credman.cmwallet.CmWalletApplication.Companion.TAG
+import com.credman.cmwallet.CmWalletApplication.Companion.computeClientId
 import com.credman.cmwallet.data.model.Credential
 import com.credman.cmwallet.data.model.CredentialDisplayData
 import com.credman.cmwallet.data.model.CredentialItem
@@ -229,7 +230,10 @@ class CreateCredentialViewModel : ViewModel() {
                 val grant = openId4VCI.credentialOffer.grants!!.authorizationCode!!
                 Log.d(TAG, "Grant: $grant")
                 if (grant.vpRequest != null) {
-                    val openId4VPRequest = OpenId4VP(grant.vpRequest)
+                    val openId4VPRequest = OpenId4VP(
+                        grant.vpRequest,
+                        computeClientId(request.callingAppInfo)
+                    )
                     val selectedCredential = CmWalletApplication.credentialRepo.getCredential("1")
                         ?: throw RuntimeException("Selected credential not found")
                     val matchedCredential =

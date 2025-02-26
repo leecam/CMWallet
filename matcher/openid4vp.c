@@ -9,7 +9,9 @@
 #include "dcql.h"
 #include "icon.h"
 
-#define PROTOCOL_OPENID4VP_1_0 "openid4vp1.0"
+// Following [draft 24](https://openid.net/specs/openid-4-verifiable-presentations-1_0-24.html#name-protocol)
+// Note that the latest spec has this changed to urn based, versioned values.
+#define PROTOCOL_OPENID4VP_1_0 "openid4vp"
 
 cJSON* GetDCRequestJson() {
     uint32_t request_size;

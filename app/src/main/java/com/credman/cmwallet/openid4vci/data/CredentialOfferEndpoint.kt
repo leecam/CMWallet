@@ -110,8 +110,32 @@ data class CredentialConfigurationMDoc(
     @SerialName("proof_types_supported") override val proofTypesSupported: Map<String, CredentialConfigurationProofType>?,
     @SerialName("display") override val display: List<CredentialConfigurationDisplay>?,
     @SerialName("doctype") val doctype: String,
-    @SerialName("claims") val claims: Map<String, Map<String, MDocClaim>>?,
-    @SerialName("order") val order: List<String>?,
+    @SerialName("claims") val claims: List<Claim>?,
+) : CredentialConfiguration()
+
+@Serializable
+data class ClaimDisplay(
+    @SerialName("name") val name: String?,
+    @SerialName("locale") val locale: String?,
+)
+
+@Serializable
+data class Claim(
+    @SerialName("mandatory") val mandatory: Boolean?,
+    @SerialName("path") val path: List<String>,
+    @SerialName("display") val display: List<ClaimDisplay>?,
+)
+
+@Serializable
+data class CredentialConfigurationSdJwtVc(
+    @SerialName("format") override val format: String,
+    @SerialName("scope") override val scope: String?,
+    @SerialName("cryptographic_binding_methods_supported") override val cryptographicBindingMethodsSupported: List<String>?,
+    @SerialName("credential_signing_alg_values_supported") override val credentialSigningAlgValuesSupported: List<String>?,
+    @SerialName("proof_types_supported") override val proofTypesSupported: Map<String, CredentialConfigurationProofType>?,
+    @SerialName("display") override val display: List<CredentialConfigurationDisplay>?,
+    @SerialName("vct") val vct: String,
+    @SerialName("claims") val claims: List<Claim>?,
 ) : CredentialConfiguration()
 
 @Serializable
@@ -128,6 +152,7 @@ object CredentialConfigurationSerializer :
     JsonContentPolymorphicSerializer<CredentialConfiguration>(CredentialConfiguration::class) {
     override fun selectDeserializer(element: JsonElement) = when {
         element.jsonObject["format"]!!.jsonPrimitive.content == "mso_mdoc" -> CredentialConfigurationMDoc.serializer()
+        element.jsonObject["format"]!!.jsonPrimitive.content == "dc+sd-jwt" -> CredentialConfigurationSdJwtVc.serializer()
         else -> CredentialConfigurationUnknownFormat.serializer()
     }
 }

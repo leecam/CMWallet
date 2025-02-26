@@ -17,98 +17,107 @@
           "description": "Mobile Driving License"
         }
       ],
-      "claims": {
-        "org.iso.18013.5.1": {
-          "family_name": {
-            "display": [
-              {
-                "name": "Family Name",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "given_name": {
-            "display": [
-              {
-                "name": "Given names",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "driving_privileges": {
-            "display": [
-              {
-                "name": "Driving Privs",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "issue_date": {
-            "display": [
-              {
-                "name": "Issue Date",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "expiry_date": {
-            "display": [
-              {
-                "name": "Expiry Date",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "birth_date": {
-            "display": [
-              {
-                "name": "Birth Date",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "document_number": {
-            "display": [
-              {
-                "name": "Document Number",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "issuing_authority": {
-            "display": [
-              {
-                "name": "Issuing Authority",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "issuing_jurisdiction": {
-            "display": [
-              {
-                "name": "Issuing Jurisdiction",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "portrait": {
-            "display": [
-              {
-                "name": "Portrait",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "age_over_21": {
-            "display": [
-              {
-                "name": "Age Over 21",
-                "locale": "en-US"
-              }
-            ]
-          }
+      "claims": [
+        {
+          "path": ["org.iso.18013.5.1", "family_name"],
+          "display": [
+            {
+              "name": "Family Name",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "given_name"],
+          "display": [
+            {
+              "name": "Given Name",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "driving_privileges"],
+          "display": [
+            {
+              "name": "Driving Privs",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "issue_date"],
+          "display": [
+            {
+              "name": "Issue Date",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "expiry_date"],
+          "display": [
+            {
+              "name": "Expiry Date",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "birth_date"],
+          "display": [
+            {
+              "name": "Birth Date",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "document_number"],
+          "display": [
+            {
+              "name": "Document Number",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "issuing_authority"],
+          "display": [
+            {
+              "name": "Issuing Authority",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "issuing_jurisdiction"],
+          "display": [
+            {
+              "name": "Issuing Jurisdiction",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "portrait"],
+          "display": [
+            {
+              "name": "Portrait",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "age_over_21"],
+          "display": [
+            {
+              "name": "Age Over 21",
+              "locale": "en-US"
+            }
+          ]
         }
-      }
+      ]
     },
     "displayData": {
       "title": "Jon's Driving License",
@@ -119,9 +128,9 @@
         "key": {
           "type": "SOFTWARE",
           "publicKey": "123",
-          "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgkAHk14S-CcPohE9v9rsVV8j7KRxrEqYYp1XuidZD2b6hRANCAAR07xfD2-9IWUn1YLsl3r0D-Nnx9toOLnhf3aMhuQmbGgxMzD6Kl_nY_UykJ-qdykIqCacRdWEGu42EotRizdWF"
+          "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgSQ0aq-w5Uyi-L3bvHBenIVVFHJCVi-GfZ-vD_ljX366hRANCAASE63-kyvOLO3RdY4q-GXEN5p6Tp5wS5ToCP64W06gX3uPneW9UFQrFMCoN1KGCwJ9trbWaH4yql-mox9Cau03i"
         },
-        "credential": "ompuYW1lU3BhY2VzoXFvcmcuaXNvLjE4MDEzLjUuMYPYGFhUpGhkaWdlc3RJRABmcmFuZG9tUKRsGD3aPLpwu_wGZyvuvdxxZWxlbWVudElkZW50aWZpZXJrZmFtaWx5X25hbWVsZWxlbWVudFZhbHVlZVNtaXRo2BhYUaRoZGlnZXN0SUQBZnJhbmRvbVAQwZXPLt5ybFSqRvFVCnPocWVsZW1lbnRJZGVudGlmaWVyamdpdmVuX25hbWVsZWxlbWVudFZhbHVlY0pvbtgYWE-kaGRpZ2VzdElEAmZyYW5kb21QPNysOvdkUbmuOPhvyXsrAHFlbGVtZW50SWRlbnRpZmllcmthZ2Vfb3Zlcl8yMWxlbGVtZW50VmFsdWX1amlzc3VlckF1dGiEQ6EBJqEYIVkCSzCCAkcwggHtoAMCAQICFHStD_3VcEOVnxRIW57aoGfaMp7FMAoGCCqGSM49BAMCMHkxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFpbiBWaWV3MRwwGgYDVQQKDBNEaWdpdGFsIENyZWRlbnRpYWxzMR8wHQYDVQQDDBZkaWdpdGFsY3JlZGVudGlhbHMuZGV2MB4XDTI0MTExMDAxMDgwM1oXDTM0MTAyOTAxMDgwM1oweTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDU1vdW50YWluIFZpZXcxHDAaBgNVBAoME0RpZ2l0YWwgQ3JlZGVudGlhbHMxHzAdBgNVBAMMFmRpZ2l0YWxjcmVkZW50aWFscy5kZXYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATrQ6h60nar2xgrGpTMbRRYLBtWyfkHw2k4QzZc40EsBJNeDp-WXKz85dJjNloCsC7Ckb1spirxQdKVPWy2eRBpo1MwUTAdBgNVHQ4EFgQUCyxw_AMcbG8Lp1EwUuOaRBk527AwHwYDVR0jBBgwFoAUCyxw_AMcbG8Lp1EwUuOaRBk527AwDwYDVR0TAQH_BAUwAwEB_zAKBggqhkjOPQQDAgNIADBFAiEA_JW68hhRYz9l2scu8yW55xi7yyq7ycHg6arTH4b75zMCIG5DADVEbdGnoh6rzTKUdXEh2EnsgjERk6vH6u25Y4fLWQG62BhZAbWmZ3ZlcnNpb25jMS4wb2RpZ2VzdEFsZ29yaXRobWdTSEEtMjU2Z2RvY1R5cGV1b3JnLmlzby4xODAxMy41LjEubURMbHZhbHVlRGlnZXN0c6Fxb3JnLmlzby4xODAxMy41LjGjAFgg-TGk78sfX6xxEfdjckEmDSfiVWzOGIIwTqm0oQetoR8BWCAcX3iJNwCyYOy1Bfl9sAjv1lEuD7iXI5dJbkwPUB6-RwJYIGFOQ5HGtkmhrJWuJ6eTdM2PC_lAIDR5_9pWUiRogpWwbWRldmljZUtleUluZm-haWRldmljZUtleaQBAiABIVggdO8Xw9vvSFlJ9WC7Jd69A_jZ8fbaDi54X92jIbkJmxoiWCAMTMw-ipf52P1MpCfqncpCKgmnEXVhBruNhKLUYs3VhWx2YWxpZGl0eUluZm-jZnNpZ25lZMB4GzIwMjQtMTEtMTdUMjA6NTI6MjIuOTE5NzgyWml2YWxpZEZyb23AeBsyMDI0LTExLTE3VDIwOjUyOjIyLjkxOTc4OVpqdmFsaWRVbnRpbMB4GzIwMzQtMTEtMDVUMjA6NTI6MjIuOTE5Nzg5WlhAl1Lt2d0SSsbuMizlTkVeLR7wucamVyUhyHm6PdG1W0YWXIxfLGwP0rG7Zhpuomh5kpItM7lRdR_FdkJHXO81MQ"
+        "credential": "ompuYW1lU3BhY2VzoXFvcmcuaXNvLjE4MDEzLjUuMYPYGFhUpGhkaWdlc3RJRABmcmFuZG9tUIdrm-vaYFzySJaTmIQCWF9xZWxlbWVudElkZW50aWZpZXJrZmFtaWx5X25hbWVsZWxlbWVudFZhbHVlZVNtaXRo2BhYUaRoZGlnZXN0SUQBZnJhbmRvbVCcn7elQIecMc4f2KhL17TwcWVsZW1lbnRJZGVudGlmaWVyamdpdmVuX25hbWVsZWxlbWVudFZhbHVlY0pvbtgYWE-kaGRpZ2VzdElEAmZyYW5kb21QmaGye6MwROqQSKeASgtoxXFlbGVtZW50SWRlbnRpZmllcmthZ2Vfb3Zlcl8yMWxlbGVtZW50VmFsdWX1amlzc3VlckF1dGiEQ6EBJqEYIVkCxDCCAsAwggJnoAMCAQICFB5_GzKtTzTv5LDMB7ew4zOnCxhNMAoGCCqGSM49BAMCMHkxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFpbiBWaWV3MRwwGgYDVQQKDBNEaWdpdGFsIENyZWRlbnRpYWxzMR8wHQYDVQQDDBZkaWdpdGFsY3JlZGVudGlhbHMuZGV2MB4XDTI1MDIxOTIzMzAxOFoXDTI2MDIxOTIzMzAxOFoweTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDU1vdW50YWluIFZpZXcxHDAaBgNVBAoME0RpZ2l0YWwgQ3JlZGVudGlhbHMxHzAdBgNVBAMMFmRpZ2l0YWxjcmVkZW50aWFscy5kZXYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATreTYr4tfzl8NQBH2D4eNiLONVazYPamjHWLsN3Gr4bAmvml1dDZk5dhLDWieRlpjKAA_IpMABbM2ISHjYBeNpo4HMMIHJMB8GA1UdIwQYMBaAFKJP9InZfEbobqOG2UdIzsy-3M_1MB0GA1UdDgQWBBTf_mpaEunAYsS8mKcl0tlw93pgKDA0BgNVHR8ELTArMCmgJ6AlhiNodHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2L2NybDAqBgNVHRIEIzAhhh9odHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2MA4GA1UdDwEB_wQEAwIHgDAVBgNVHSUBAf8ECzAJBgcogYxdBQECMAoGCCqGSM49BAMCA0cAMEQCIGHFy_V8weN78uCxM9ofIDEEXXCbWiEUDnpoMJvLB0LnAiBwr6LhxJv7p4wVzAnlGe0Ef8pqYxshyE8NufwfR_ULAlkButgYWQG1pmd2ZXJzaW9uYzEuMG9kaWdlc3RBbGdvcml0aG1nU0hBLTI1Nmdkb2NUeXBldW9yZy5pc28uMTgwMTMuNS4xLm1ETGx2YWx1ZURpZ2VzdHOhcW9yZy5pc28uMTgwMTMuNS4xowBYIF4np1s8h5zq4R447fmweHJCW6Nd0X9qIlFVmdBckcxQAVgg5epO0W1CanUYkN3my72qMFM_NnUTmlUcXuYpkzhCK8ICWCAA5AsOZa7MqBIVYBoG7kGirGgnXgj2gW5ZN1MtEKKJvm1kZXZpY2VLZXlJbmZvoWlkZXZpY2VLZXmkAQIgASFYIITrf6TK84s7dF1jir4ZcQ3mnpOnnBLlOgI_rhbTqBfeIlgg4-d5b1QVCsUwKg3UoYLAn22ttZofjKqX6ajH0Jq7TeJsdmFsaWRpdHlJbmZvo2ZzaWduZWTAeBsyMDI1LTAyLTE5VDIzOjM2OjU4LjIxMDM5MVppdmFsaWRGcm9twHgbMjAyNS0wMi0xOVQyMzozNjo1OC4yMTAzOTlaanZhbGlkVW50aWzAeBsyMDM1LTAyLTA3VDIzOjM2OjU4LjIxMDM5OVpYQH2YP3brP6bfJDJO_FoaPUWwB5LtpYVYKChulL-3yQesOMekny68Gt-G9J3rEZMw7MUI64Y35nWJMqIF_9xB9zE"
       }
     ]
   },
@@ -142,84 +151,89 @@
           "locale": "en-US"
         }
       ],
-      "claims": {
-        "com.emvco.payment_card.1": {
-          "holder_name": {
-            "display": [
-              {
-                "name": "Holder Name",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "card_number": {
-            "display": [
-              {
-                "name": "Card Number",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "expiry_month": {
-            "display": [
-              {
-                "name": "Month of Expiry",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "expiry_year": {
-            "display": [
-              {
-                "name": "Year of Expiry",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "card_network": {
-            "display": [
-              {
-                "name": "Card Network",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "card_issuer": {
-            "display": [
-              {
-                "name": "Card issuer",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "par": {
-            "display": [
-              {
-                "name": "Payment Account Reference",
-                "locale": "en-US"
-              }
-            ]
-          }
+      "claims": [
+        {
+          "path": ["com.emvco.payment_card.1", "holder_name"],
+          "display": [
+            {
+              "name": "Holder Name",
+              "locale": "en-US"
+            }
+          ]
         },
-        "com.example.1": {
-          "age_over_21": {
-            "display": [
-              {
-                "name": "Age over 21",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "email": {
-            "display": [
-              {
-                "name": "Email Address",
-                "locale": "en-US"
-              }
-            ]
-          }
+        {
+          "path": ["com.emvco.payment_card.1", "card_number"],
+          "display": [
+            {
+              "name": "Card Number",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "expiry_month"],
+          "display": [
+            {
+              "name": "Month of Expiry",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "expiry_year"],
+          "display": [
+            {
+              "name": "Year of Expiry",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "card_network"],
+          "display": [
+            {
+              "name": "Card Network",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "card_issuer"],
+          "display": [
+            {
+              "name": "Card issuer",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "par"],
+          "display": [
+            {
+              "name": "Payment Account Reference",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.example.1", "age_over_21"],
+          "display": [
+            {
+              "name": "Age over 21",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.example.1", "email"],
+          "display": [
+            {
+              "name": "Email Address",
+              "locale": "en-US"
+            }
+          ]
         }
-      }
+      ]
     },
     "displayData": {
       "title": "Jon's Card 2312",
@@ -231,9 +245,9 @@
         "key": {
           "type": "SOFTWARE",
           "publicKey": "123",
-          "privateKey":  "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg6ef4-enmfQHRWUW40-Soj3aFB0rsEOp3tYMW-HJPBvChRANCAAT5N1NLZcub4bOgWfBwF8MHPGkfJ8Dm300cioatq9XovaLgG205FEXUOuNMEMQuLbrn8oiOC0nTnNIVn-OtSmSb"
+          "privateKey":  "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgAeKv-_mllooXyA6zel3XTX7b-dsUzAgO4OTywAnWzK2hRANCAAQHSLELUPTMqrMKKI7eHXSyu9EFhmwSLpupg-Rq3nkWtclLLEWKhEXfGMk4Q26WbmEwJpI3v79xcSsEAyJ193Rl"
         },
-        "credential": "ompuYW1lU3BhY2VzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xh9gYWFikaGRpZ2VzdElEAGZyYW5kb21Q-jAifDf7m0lvMUNpDM1ya3FlbGVtZW50SWRlbnRpZmllcmtob2xkZXJfbmFtZWxlbGVtZW50VmFsdWVpSm9uIFNtaXRo2BhYX6RoZGlnZXN0SUQBZnJhbmRvbVA850Ivn6J1O0aRIw7GNT_rcWVsZW1lbnRJZGVudGlmaWVya2NhcmRfbnVtYmVybGVsZW1lbnRWYWx1ZXA1NDY2MDAwMDU1NTUyMzEy2BhYUKRoZGlnZXN0SUQCZnJhbmRvbVDw9qY70lhRRDPAtRgE_VGOcWVsZW1lbnRJZGVudGlmaWVybGV4cGlyeV9tb250aGxlbGVtZW50VmFsdWUH2BhYUaRoZGlnZXN0SUQDZnJhbmRvbVCguM-0xV7OGp8_zZs3jBLncWVsZW1lbnRJZGVudGlmaWVya2V4cGlyeV95ZWFybGVsZW1lbnRWYWx1ZRkH69gYWFqkaGRpZ2VzdElEBGZyYW5kb21Q_xa8TC2lUq1aBbSi0PG-C3FlbGVtZW50SWRlbnRpZmllcmxjYXJkX25ldHdvcmtsZWxlbWVudFZhbHVlak1hc3RlcmNhcmTYGFhWpGhkaWdlc3RJRAVmcmFuZG9tUCEn0qaVNOPm2j64RKZGtkpxZWxlbWVudElkZW50aWZpZXJrY2FyZF9pc3N1ZXJsZWxlbWVudFZhbHVlZ1RyaWJhbmvYGFhMpGhkaWdlc3RJRAZmcmFuZG9tUK8KSXQbl5X9C9drQAP-iBRxZWxlbWVudElkZW50aWZpZXJjcGFybGVsZW1lbnRWYWx1ZWUwMDAxMWppc3N1ZXJBdXRohEOhASahGCFZAkswggJHMIIB7aADAgECAhR0rQ_91XBDlZ8USFue2qBn2jKexTAKBggqhkjOPQQDAjB5MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzEcMBoGA1UECgwTRGlnaXRhbCBDcmVkZW50aWFsczEfMB0GA1UEAwwWZGlnaXRhbGNyZWRlbnRpYWxzLmRldjAeFw0yNDExMTAwMTA4MDNaFw0zNDEwMjkwMTA4MDNaMHkxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFpbiBWaWV3MRwwGgYDVQQKDBNEaWdpdGFsIENyZWRlbnRpYWxzMR8wHQYDVQQDDBZkaWdpdGFsY3JlZGVudGlhbHMuZGV2MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE60OoetJ2q9sYKxqUzG0UWCwbVsn5B8NpOEM2XONBLASTXg6fllys_OXSYzZaArAuwpG9bKYq8UHSlT1stnkQaaNTMFEwHQYDVR0OBBYEFAsscPwDHGxvC6dRMFLjmkQZOduwMB8GA1UdIwQYMBaAFAsscPwDHGxvC6dRMFLjmkQZOduwMA8GA1UdEwEB_wQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIhAPyVuvIYUWM_ZdrHLvMluecYu8squ8nB4Omq0x-G--czAiBuQwA1RG3Rp6Ieq80ylHVxIdhJ7IIxEZOrx-rtuWOHy1kCT9gYWQJKpmd2ZXJzaW9uYzEuMG9kaWdlc3RBbGdvcml0aG1nU0hBLTI1Nmdkb2NUeXBldmNvbS5lbXZjby5wYXltZW50X2NhcmRsdmFsdWVEaWdlc3RzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xpwBYIG4QcyNvAlqf-AYf9tuYiuRyeSo67hWIOkydg-_6jooEAVggHPn3keJWMazuETxou3oIxDv6XvGJ7eqt2hJV7XeXT9ICWCAn4zA045juUKKmTNlRE2kcXOQrmvaNj23MckydlZ1vlwNYIIqYdm00xkUS5KTYo4aMdYAktMoQfN9wyI6CHMYjMs9jBFggr75-cZ10CzdRuDNypGJPl0ggei3Jr9W1BW2GbyvsUwgFWCAT0V76vn1CZjO45C2DT0RcwnS-yv2VsKTbIX7VPvNPvwZYIDH5Bw-DTfy6DS2UGqNwhmKEgS7pUFatX-kKS8hnLU0cbWRldmljZUtleUluZm-haWRldmljZUtleaQBAiABIVgg-TdTS2XLm-GzoFnwcBfDBzxpHyfA5t9NHIqGravV6L0iWCCi4BttORRF1DrjTBDELi265_KIjgtJ05zSFZ_jrUpkm2x2YWxpZGl0eUluZm-jZnNpZ25lZMB4GzIwMjQtMTItMDRUMDQ6MDY6MTguMTA3ODY5Wml2YWxpZEZyb23AeBsyMDI0LTEyLTA0VDA0OjA2OjE4LjEwNzg4NVpqdmFsaWRVbnRpbMB4GzIwMzQtMTEtMjJUMDQ6MDY6MTguMTA3ODg3WlhAR-fTLlsbQZQI0xe0XwT8kFBAI2i8vv6usxqb8XY13VHwNOA_2Xz_eyIjkF5Lr4vd4a6eVFlUkt_i1l6vZ4rQ9Q"
+        "credential": "ompuYW1lU3BhY2VzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xhtgYWFikaGRpZ2VzdElEAGZyYW5kb21Qn-xtxi1QSnxAl7NQN09drXFlbGVtZW50SWRlbnRpZmllcmtob2xkZXJfbmFtZWxlbGVtZW50VmFsdWVpSm9uIFNtaXRo2BhYV6RoZGlnZXN0SUQBZnJhbmRvbVCy75-zIbR6GPPlq-Ac71b_cWVsZW1lbnRJZGVudGlmaWVya2NhcmRfbnVtYmVybGVsZW1lbnRWYWx1ZRsAE2tMT6dJONgYWFCkaGRpZ2VzdElEAmZyYW5kb21QqTdN2PBrNgNmwhsEkRp13HFlbGVtZW50SWRlbnRpZmllcmxleHBpcnlfbW9udGhsZWxlbWVudFZhbHVlB9gYWFGkaGRpZ2VzdElEA2ZyYW5kb21Q2BiJAOdaxXtQ1BNuHRMrLHFlbGVtZW50SWRlbnRpZmllcmtleHBpcnlfeWVhcmxlbGVtZW50VmFsdWUZB-vYGFhapGhkaWdlc3RJRARmcmFuZG9tUMN-Q5rkKGW7YSEqxVq-9oxxZWxlbWVudElkZW50aWZpZXJsY2FyZF9uZXR3b3JrbGVsZW1lbnRWYWx1ZWpNYXN0ZXJjYXJk2BhYVqRoZGlnZXN0SUQFZnJhbmRvbVAEZ-AETIocwcIsDtpf4dYZcWVsZW1lbnRJZGVudGlmaWVya2NhcmRfaXNzdWVybGVsZW1lbnRWYWx1ZWdUcmliYW5ramlzc3VlckF1dGiEQ6EBJqEYIVkCxDCCAsAwggJnoAMCAQICFB5_GzKtTzTv5LDMB7ew4zOnCxhNMAoGCCqGSM49BAMCMHkxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFpbiBWaWV3MRwwGgYDVQQKDBNEaWdpdGFsIENyZWRlbnRpYWxzMR8wHQYDVQQDDBZkaWdpdGFsY3JlZGVudGlhbHMuZGV2MB4XDTI1MDIxOTIzMzAxOFoXDTI2MDIxOTIzMzAxOFoweTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDU1vdW50YWluIFZpZXcxHDAaBgNVBAoME0RpZ2l0YWwgQ3JlZGVudGlhbHMxHzAdBgNVBAMMFmRpZ2l0YWxjcmVkZW50aWFscy5kZXYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATreTYr4tfzl8NQBH2D4eNiLONVazYPamjHWLsN3Gr4bAmvml1dDZk5dhLDWieRlpjKAA_IpMABbM2ISHjYBeNpo4HMMIHJMB8GA1UdIwQYMBaAFKJP9InZfEbobqOG2UdIzsy-3M_1MB0GA1UdDgQWBBTf_mpaEunAYsS8mKcl0tlw93pgKDA0BgNVHR8ELTArMCmgJ6AlhiNodHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2L2NybDAqBgNVHRIEIzAhhh9odHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2MA4GA1UdDwEB_wQEAwIHgDAVBgNVHSUBAf8ECzAJBgcogYxdBQECMAoGCCqGSM49BAMCA0cAMEQCIGHFy_V8weN78uCxM9ofIDEEXXCbWiEUDnpoMJvLB0LnAiBwr6LhxJv7p4wVzAnlGe0Ef8pqYxshyE8NufwfR_ULAlkCLNgYWQInpmd2ZXJzaW9uYzEuMG9kaWdlc3RBbGdvcml0aG1nU0hBLTI1Nmdkb2NUeXBldmNvbS5lbXZjby5wYXltZW50X2NhcmRsdmFsdWVEaWdlc3RzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xpgBYIFqUjQKjamRWx4_JjQm14y2lXDkjW4D6JXi6tq6S-ViYAVggXV22lgSVn8yrMFbEmx-3S9loj-deisDuucA_XVi1A3ECWCDhnxEJWG5PwjiwwIqDpjuRjLIRruM4mE93QJZXNeDx6QNYIOGAbHAVth0CV5zzCbFRFPD1W81cBoeEmaFj8gw8mAdMBFggk283FAoIvJk-jYZWs7FN_lG6OI10gSYNRsR0ClftxyEFWCDwS5Mr2EK3M9bOiN3M7_nJiuLWFeqwqgygskDZ19DIp21kZXZpY2VLZXlJbmZvoWlkZXZpY2VLZXmkAQIgASFYIAdIsQtQ9Myqswoojt4ddLK70QWGbBIum6mD5GreeRa1IlggyUssRYqERd8YyThDbpZuYTAmkje_v3FxKwQDInX3dGVsdmFsaWRpdHlJbmZvo2ZzaWduZWTAeBsyMDI1LTAyLTE5VDIzOjM2OjU4LjIxMDM5MVppdmFsaWRGcm9twHgbMjAyNS0wMi0xOVQyMzozNjo1OC4yMTAzOTlaanZhbGlkVW50aWzAeBsyMDM1LTAyLTA3VDIzOjM2OjU4LjIxMDM5OVpYQPH-YmEgmS0VD8nttC6w90GayAVwUWbhtpuwz8MzcPM8kew3Gl5D4oj6y3evVVPjbYQveA6uZIi5elHoxABLZBg"
       }
     ]
   },
@@ -254,84 +268,89 @@
           "locale": "en-US"
         }
       ],
-      "claims": {
-        "com.emvco.payment_card.1": {
-          "holder_name": {
-            "display": [
-              {
-                "name": "Holder Name",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "card_number": {
-            "display": [
-              {
-                "name": "Card Number",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "expiry_month": {
-            "display": [
-              {
-                "name": "Month of Expiry",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "expiry_year": {
-            "display": [
-              {
-                "name": "Year of Expiry",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "card_network": {
-            "display": [
-              {
-                "name": "Card Network",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "card_issuer": {
-            "display": [
-              {
-                "name": "Card issuer",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "par": {
-            "display": [
-              {
-                "name": "Payment Account Reference",
-                "locale": "en-US"
-              }
-            ]
-          }
+      "claims": [
+        {
+          "path": ["com.emvco.payment_card.1", "holder_name"],
+          "display": [
+            {
+              "name": "Holder Name",
+              "locale": "en-US"
+            }
+          ]
         },
-        "com.example.1": {
-          "age_over_21": {
-            "display": [
-              {
-                "name": "Age over 21",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "email": {
-            "display": [
-              {
-                "name": "Email Address",
-                "locale": "en-US"
-              }
-            ]
-          }
+        {
+          "path": ["com.emvco.payment_card.1", "card_number"],
+          "display": [
+            {
+              "name": "Card Number",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "expiry_month"],
+          "display": [
+            {
+              "name": "Month of Expiry",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "expiry_year"],
+          "display": [
+            {
+              "name": "Year of Expiry",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "card_network"],
+          "display": [
+            {
+              "name": "Card Network",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "card_issuer"],
+          "display": [
+            {
+              "name": "Card issuer",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.emvco.payment_card.1", "par"],
+          "display": [
+            {
+              "name": "Payment Account Reference",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.example.1", "age_over_21"],
+          "display": [
+            {
+              "name": "Age over 21",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["com.example.1", "email"],
+          "display": [
+            {
+              "name": "Email Address",
+              "locale": "en-US"
+            }
+          ]
         }
-      }
+      ]
     },
     "displayData": {
       "title": "Jon's Card 9012",
@@ -343,9 +362,144 @@
         "key": {
           "type": "SOFTWARE",
           "publicKey": "123",
-          "privateKey":  "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg6ef4-enmfQHRWUW40-Soj3aFB0rsEOp3tYMW-HJPBvChRANCAAT5N1NLZcub4bOgWfBwF8MHPGkfJ8Dm300cioatq9XovaLgG205FEXUOuNMEMQuLbrn8oiOC0nTnNIVn-OtSmSb"
+          "privateKey":  "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgoS8u5Lt5Cc-lG4pEAyCWvoPkggEb9iRJzYwuF1t-NkGhRANCAASXZ6tPbZTD4FmdQZ-TCgQd-7YRmZ3j3vTkrCv5-8cUtDNE-xCJjJiw59hs6WMVbb0xWTRcEnsBjjeYGJjJvLLJ"
         },
-        "credential": "ompuYW1lU3BhY2VzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xh9gYWFikaGRpZ2VzdElEAGZyYW5kb21QYXl5NnPh7MFFB_hU73A-u3FlbGVtZW50SWRlbnRpZmllcmtob2xkZXJfbmFtZWxlbGVtZW50VmFsdWVpSm9uIFNtaXRo2BhYX6RoZGlnZXN0SUQBZnJhbmRvbVA3zeIR9QXYuwc9gskURP0ycWVsZW1lbnRJZGVudGlmaWVya2NhcmRfbnVtYmVybGVsZW1lbnRWYWx1ZXA0MDAwMTIzNDU2Nzg5MDEy2BhYUKRoZGlnZXN0SUQCZnJhbmRvbVA2oIyyL2pnwkga-2gAXPSucWVsZW1lbnRJZGVudGlmaWVybGV4cGlyeV9tb250aGxlbGVtZW50VmFsdWUI2BhYUaRoZGlnZXN0SUQDZnJhbmRvbVAd-hrRHsaUVefNxzSpzpCdcWVsZW1lbnRJZGVudGlmaWVya2V4cGlyeV95ZWFybGVsZW1lbnRWYWx1ZRkH7NgYWFSkaGRpZ2VzdElEBGZyYW5kb21QJgNWoVhWmecMiryYGvrNPHFlbGVtZW50SWRlbnRpZmllcmxjYXJkX25ldHdvcmtsZWxlbWVudFZhbHVlZFZpc2HYGFhWpGhkaWdlc3RJRAVmcmFuZG9tUBXktMHt-ke9UrX7CtsdCCNxZWxlbWVudElkZW50aWZpZXJrY2FyZF9pc3N1ZXJsZWxlbWVudFZhbHVlZ1RyaWJhbmvYGFhMpGhkaWdlc3RJRAZmcmFuZG9tUHltHhuXCrWCbqd-yE-i9oNxZWxlbWVudElkZW50aWZpZXJjcGFybGVsZW1lbnRWYWx1ZWUwMDAxMmppc3N1ZXJBdXRohEOhASahGCFZAkswggJHMIIB7aADAgECAhR0rQ_91XBDlZ8USFue2qBn2jKexTAKBggqhkjOPQQDAjB5MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzEcMBoGA1UECgwTRGlnaXRhbCBDcmVkZW50aWFsczEfMB0GA1UEAwwWZGlnaXRhbGNyZWRlbnRpYWxzLmRldjAeFw0yNDExMTAwMTA4MDNaFw0zNDEwMjkwMTA4MDNaMHkxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFpbiBWaWV3MRwwGgYDVQQKDBNEaWdpdGFsIENyZWRlbnRpYWxzMR8wHQYDVQQDDBZkaWdpdGFsY3JlZGVudGlhbHMuZGV2MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE60OoetJ2q9sYKxqUzG0UWCwbVsn5B8NpOEM2XONBLASTXg6fllys_OXSYzZaArAuwpG9bKYq8UHSlT1stnkQaaNTMFEwHQYDVR0OBBYEFAsscPwDHGxvC6dRMFLjmkQZOduwMB8GA1UdIwQYMBaAFAsscPwDHGxvC6dRMFLjmkQZOduwMA8GA1UdEwEB_wQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIhAPyVuvIYUWM_ZdrHLvMluecYu8squ8nB4Omq0x-G--czAiBuQwA1RG3Rp6Ieq80ylHVxIdhJ7IIxEZOrx-rtuWOHy1kCT9gYWQJKpmd2ZXJzaW9uYzEuMG9kaWdlc3RBbGdvcml0aG1nU0hBLTI1Nmdkb2NUeXBldmNvbS5lbXZjby5wYXltZW50X2NhcmRsdmFsdWVEaWdlc3RzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xpwBYIH79h9Rlegpc3vROd7nILPcvahHSsVG5zMQWZOAmf2ReAVggqSzksj1rnV-q1jpKmcKkrJEleVATHSdgJ5UcCtvSUiUCWCBguY6sfm0qTHc4krV36xP-0cSscTEYtsbNI-I0vZq3LQNYIIjanfv8qc6W23SekoZI8rYKkUrRklBGqahcSAPl89QdBFggBxfv6EafLtY04S-H-_puZbawysqXpzWGKlyFLDBOTbEFWCBmkGPrqNJdZCwH69wj1a3HtITQlmtnW7XxE9xWL_36IQZYIFu6J5uewR52b0NYhHLWCIbq2yzQ_K91r9MMwtFgeq2cbWRldmljZUtleUluZm-haWRldmljZUtleaQBAiABIVgg-TdTS2XLm-GzoFnwcBfDBzxpHyfA5t9NHIqGravV6L0iWCCi4BttORRF1DrjTBDELi265_KIjgtJ05zSFZ_jrUpkm2x2YWxpZGl0eUluZm-jZnNpZ25lZMB4GzIwMjQtMTItMDRUMDQ6MDg6MzIuMTY4ODQwWml2YWxpZEZyb23AeBsyMDI0LTEyLTA0VDA0OjA4OjMyLjE2ODg1M1pqdmFsaWRVbnRpbMB4GzIwMzQtMTEtMjJUMDQ6MDg6MzIuMTY4ODU0WlhAzXjM8QZIBbCNYAdSqbcvwnVImTnEx0m-lRpDIg6xUrqN5FVDNLrNW6JqZ4uRBMTZn5dPdgpx574D5-XjuBKgsQ"
+        "credential": "ompuYW1lU3BhY2VzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xhtgYWFikaGRpZ2VzdElEAGZyYW5kb21QoXDaLtbgcvy4e_vXn1FpTXFlbGVtZW50SWRlbnRpZmllcmtob2xkZXJfbmFtZWxlbGVtZW50VmFsdWVpSm9uIFNtaXRo2BhYV6RoZGlnZXN0SUQBZnJhbmRvbVCyn6ybp1u176yZ3Xt3XgM_cWVsZW1lbnRJZGVudGlmaWVya2NhcmRfbnVtYmVybGVsZW1lbnRWYWx1ZRsADjYXUbMaFNgYWFCkaGRpZ2VzdElEAmZyYW5kb21QIYqIDhi0HMtxE0ancxm4xHFlbGVtZW50SWRlbnRpZmllcmxleHBpcnlfbW9udGhsZWxlbWVudFZhbHVlB9gYWFGkaGRpZ2VzdElEA2ZyYW5kb21QR9NF1Fju42NMiQyFH4oXoXFlbGVtZW50SWRlbnRpZmllcmtleHBpcnlfeWVhcmxlbGVtZW50VmFsdWUZB-zYGFhUpGhkaWdlc3RJRARmcmFuZG9tUEAz1YwXF-mSxinXwnR8_DhxZWxlbWVudElkZW50aWZpZXJsY2FyZF9uZXR3b3JrbGVsZW1lbnRWYWx1ZWRWaXNh2BhYVqRoZGlnZXN0SUQFZnJhbmRvbVAg9E02263Un5VQGmXegu0jcWVsZW1lbnRJZGVudGlmaWVya2NhcmRfaXNzdWVybGVsZW1lbnRWYWx1ZWdUcmliYW5ramlzc3VlckF1dGiEQ6EBJqEYIVkCxDCCAsAwggJnoAMCAQICFB5_GzKtTzTv5LDMB7ew4zOnCxhNMAoGCCqGSM49BAMCMHkxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFpbiBWaWV3MRwwGgYDVQQKDBNEaWdpdGFsIENyZWRlbnRpYWxzMR8wHQYDVQQDDBZkaWdpdGFsY3JlZGVudGlhbHMuZGV2MB4XDTI1MDIxOTIzMzAxOFoXDTI2MDIxOTIzMzAxOFoweTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDU1vdW50YWluIFZpZXcxHDAaBgNVBAoME0RpZ2l0YWwgQ3JlZGVudGlhbHMxHzAdBgNVBAMMFmRpZ2l0YWxjcmVkZW50aWFscy5kZXYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATreTYr4tfzl8NQBH2D4eNiLONVazYPamjHWLsN3Gr4bAmvml1dDZk5dhLDWieRlpjKAA_IpMABbM2ISHjYBeNpo4HMMIHJMB8GA1UdIwQYMBaAFKJP9InZfEbobqOG2UdIzsy-3M_1MB0GA1UdDgQWBBTf_mpaEunAYsS8mKcl0tlw93pgKDA0BgNVHR8ELTArMCmgJ6AlhiNodHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2L2NybDAqBgNVHRIEIzAhhh9odHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2MA4GA1UdDwEB_wQEAwIHgDAVBgNVHSUBAf8ECzAJBgcogYxdBQECMAoGCCqGSM49BAMCA0cAMEQCIGHFy_V8weN78uCxM9ofIDEEXXCbWiEUDnpoMJvLB0LnAiBwr6LhxJv7p4wVzAnlGe0Ef8pqYxshyE8NufwfR_ULAlkCLNgYWQInpmd2ZXJzaW9uYzEuMG9kaWdlc3RBbGdvcml0aG1nU0hBLTI1Nmdkb2NUeXBldmNvbS5lbXZjby5wYXltZW50X2NhcmRsdmFsdWVEaWdlc3RzoXgYY29tLmVtdmNvLnBheW1lbnRfY2FyZC4xpgBYIFDfXpu3eDVquHgX3ERd12qaHyx_BNmkfmH-kKZ4M6vIAVggs0U0xfz-z7WqeESWRX42KxDd3-M5kBwoost0wjoX0F4CWCDfNNXr-YsJin7Aj0aRgPz5OS__j84vZTB34M-TiD2eMQNYIHDdhmMaJJUWj1cNO92QjKxe0bptFlSGCWx678lNGYvUBFggLyIt_EBJdt07C1hVrZhsOrL3aaA_g8lJBC9Y1UyQmwUFWCCht28D17peKddyCaWIeZkNAaF3qq2T1UlHErcujoPAEG1kZXZpY2VLZXlJbmZvoWlkZXZpY2VLZXmkAQIgASFYIJdnq09tlMPgWZ1Bn5MKBB37thGZnePe9OSsK_n7xxS0IlggM0T7EImMmLDn2GzpYxVtvTFZNFwSewGON5gYmMm8sslsdmFsaWRpdHlJbmZvo2ZzaWduZWTAeBsyMDI1LTAyLTE5VDIzOjM2OjU4LjIxMDM5MVppdmFsaWRGcm9twHgbMjAyNS0wMi0xOVQyMzozNjo1OC4yMTAzOTlaanZhbGlkVW50aWzAeBsyMDM1LTAyLTA3VDIzOjM2OjU4LjIxMDM5OVpYQGIEfeCaBOdPWzt5OSRYdZAJ1QLaKKN8uw363aM6fH8ZeMcp19XQPJTsht_eYLYSlGU8PJwnmE0GjaBylAlE_dQ"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "config": {
+      "format": "mso_mdoc",
+      "doctype": "org.iso.7367.1.mVRC",
+      "cryptographic_binding_methods_supported": [
+        "cose_key"
+      ],
+      "credential_signing_alg_values_supported": [
+        "ES256"
+      ],
+      "display": [
+        {
+          "name": "Vehicle Registration",
+          "locale": "en-US",
+          "description": "Vehicle Registration"
+        }
+      ],
+      "claims": [
+        {
+          "path": ["org.iso.18013.5.1", "family_name"],
+          "display": [
+            {
+              "name": "Family Name",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "first_name"],
+          "display": [
+            {
+              "name": "Given Name",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.7367.1", "vehicle_holder"],
+          "display": [
+            {
+              "name": "Vehicle Holder Information",
+              "locale": "en-US"
+            }
+          ]
+        }
+      ]
+    },
+    "displayData": {
+      "title": "Erika's Vehicle Registration",
+      "subtitle": "Utopia DMV"
+    },
+    "credentials": [
+      {
+        "key": {
+          "type": "SOFTWARE",
+          "publicKey": "123",
+          "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgxbP5_NWv5P6ryPPUMNPIqcm3EnRxm3fdZruS_3fwsHyhRANCAASLZKZpVb6tjw3Ojhq8Pz9rnrM6uqxGBDX62dBYD22vz2Ds_B6AzAWg_K-cq4_3VEeGUJdy7EqY1P0JlK4Rzfv8"
+        },
+        "credential": "ompuYW1lU3BhY2VzonFvcmcuaXNvLjE4MDEzLjUuMYLYGFhUpGhkaWdlc3RJRABmcmFuZG9tUFZLiqRxnClDr_hhdPAGv9dxZWxlbWVudElkZW50aWZpZXJrZmFtaWx5X25hbWVsZWxlbWVudFZhbHVlZVNtaXRo2BhYU6RoZGlnZXN0SUQBZnJhbmRvbVC9ddHctwClWDzf4cYApT7CcWVsZW1lbnRJZGVudGlmaWVyamZpcnN0X25hbWVsZWxlbWVudFZhbHVlZUVyaWthbm9yZy5pc28uNzM2Ny4xgdgYWFekaGRpZ2VzdElEAGZyYW5kb21Q4HxjT7gM5xrse2ZH-IeVbXFlbGVtZW50SWRlbnRpZmllcm52ZWhpY2xlX2hvbGRlcmxlbGVtZW50VmFsdWVlOTQwNDNqaXNzdWVyQXV0aIRDoQEmoRghWQLEMIICwDCCAmegAwIBAgIUHn8bMq1PNO_ksMwHt7DjM6cLGE0wCgYIKoZIzj0EAwIweTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDU1vdW50YWluIFZpZXcxHDAaBgNVBAoME0RpZ2l0YWwgQ3JlZGVudGlhbHMxHzAdBgNVBAMMFmRpZ2l0YWxjcmVkZW50aWFscy5kZXYwHhcNMjUwMjE5MjMzMDE4WhcNMjYwMjE5MjMzMDE4WjB5MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzEcMBoGA1UECgwTRGlnaXRhbCBDcmVkZW50aWFsczEfMB0GA1UEAwwWZGlnaXRhbGNyZWRlbnRpYWxzLmRldjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOt5Nivi1_OXw1AEfYPh42Is41VrNg9qaMdYuw3cavhsCa-aXV0NmTl2EsNaJ5GWmMoAD8ikwAFszYhIeNgF42mjgcwwgckwHwYDVR0jBBgwFoAUok_0idl8Ruhuo4bZR0jOzL7cz_UwHQYDVR0OBBYEFN_-aloS6cBixLyYpyXS2XD3emAoMDQGA1UdHwQtMCswKaAnoCWGI2h0dHBzOi8vZGlnaXRhbC1jcmVkZW50aWFscy5kZXYvY3JsMCoGA1UdEgQjMCGGH2h0dHBzOi8vZGlnaXRhbC1jcmVkZW50aWFscy5kZXYwDgYDVR0PAQH_BAQDAgeAMBUGA1UdJQEB_wQLMAkGByiBjF0FAQIwCgYIKoZIzj0EAwIDRwAwRAIgYcXL9XzB43vy4LEz2h8gMQRdcJtaIRQOemgwm8sHQucCIHCvouHEm_unjBXMCeUZ7QR_ympjGyHITw25_B9H9QsCWQHI2BhZAcOmZ3ZlcnNpb25jMS4wb2RpZ2VzdEFsZ29yaXRobWdTSEEtMjU2Z2RvY1R5cGVzb3JnLmlzby43MzY3LjEubVZSQ2x2YWx1ZURpZ2VzdHOicW9yZy5pc28uMTgwMTMuNS4xogBYIEBr25Mv-nLOQjOQWpKngwkfdOUrWV9lNgXR-nVRjBEtAVggz3kHjFTJtJZNyPXE2znDKaljYJIQgAXQDWMkwGI4o-hub3JnLmlzby43MzY3LjGhAFgglUM3P2o82xg5QqT_G0s749lw5K2WPRC4md2C-IHhl6ttZGV2aWNlS2V5SW5mb6FpZGV2aWNlS2V5pAECIAEhWCCLZKZpVb6tjw3Ojhq8Pz9rnrM6uqxGBDX62dBYD22vzyJYIGDs_B6AzAWg_K-cq4_3VEeGUJdy7EqY1P0JlK4Rzfv8bHZhbGlkaXR5SW5mb6Nmc2lnbmVkwHgbMjAyNS0wMi0xOVQyMzozNjo1OC4yMTAzOTFaaXZhbGlkRnJvbcB4GzIwMjUtMDItMTlUMjM6MzY6NTguMjEwMzk5Wmp2YWxpZFVudGlswHgbMjAzNS0wMi0wN1QyMzozNjo1OC4yMTAzOTlaWEAlr2yFr7mwbEf0lCFb2KwLczk-zeAl58GitYixp375_p0cqKLyS4vo8Wtn5yQhPnKjLhcgVk9RpVehCoG0SbQd"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "config": {
+      "format": "dc+sd-jwt",
+      "vct": "https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/1.4.0/annexes/annex-3/annex-3.01-pid-rulebook",
+      "cryptographic_binding_methods_supported": [
+        "jwk"
+      ],
+      "credential_signing_alg_values_supported": [
+        "ES256"
+      ],
+      "display": [
+        {
+          "name": "PID",
+          "locale": "en-US",
+          "description": "PID"
+        }
+      ],
+      "claims": [
+        {
+          "path": ["is_over_65"],
+          "display": [
+            {
+              "name": "Age Over 65",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["given_name"],
+          "display": [
+            {
+              "name": "Given Name",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["family_name"],
+          "display": [
+            {
+              "name": "Surname",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["age_over_18"],
+          "display": [
+            {
+              "name": "Age Over 18",
+              "locale": "en-US"
+            }
+          ]
+        }
+      ]
+    },
+    "displayData": {
+      "title": "Erika's PID",
+      "subtitle": "Utopia Government"
+    },
+    "credentials": [
+      {
+        "key": {
+          "type": "SOFTWARE",
+          "publicKey": "123",
+          "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg-bu-9SO_hnjBt5BZ__3WaY4FZ5eKMECZS7Ashf_OXh-hRANCAAQhxAMHe9Dpt3PdhQyWfpXefWdUI7mO2R4DJcMXY8QdxCLPE6oO3sIQ8vW7gHpYsdJkpE-GhIenFKVX4W66gqfz"
+        },
+        "credential": "eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImRjK3NkLWp3dCJ9.eyJfc2QiOiBbIkhYMDU5NkVIRE95alg4ay1PWld0bHpIcWZvY0pWMHpzRV9oWV9vOG1HMEEiXSwgImlzcyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAwLCAiZXhwIjogMTg4MzAwMDAwMCwgInZjdCI6ICJodHRwczovL2V1LWRpZ2l0YWwtaWRlbnRpdHktd2FsbGV0LmdpdGh1Yi5pby9ldWRpLWRvYy1hcmNoaXRlY3R1cmUtYW5kLXJlZmVyZW5jZS1mcmFtZXdvcmsvMS40LjAvYW5uZXhlcy9hbm5leC0zL2FubmV4LTMuMDEtcGlkLXJ1bGVib29rIiwgIl9zZF9hbGciOiAic2hhLTI1NiJ9.DsiLHFyRoAgNWjLDdi50Rn6G50tyFtRcMMvFl9sk5qb0YaPN3-I0xwlJiUet9O808ok-R56ydHxKp0EEVaEveA~WyJJRFZwNWw0OERRWFRtZTJ3ODNheTJBIiwgImdpdmVuX25hbWUiLCAiRWxpc2EiXQ~"
       }
     ]
   },
@@ -366,18 +520,17 @@
           "locale": "en-US"
         }
       ],
-      "claims": {
-        "com.fido.phone.1": {
-          "phone_number": {
-            "display": [
-              {
-                "name": "Phone Number",
-                "locale": "en-US"
-              }
-            ]
-          }
+      "claims": [
+        {
+          "path": ["com.fido.phone.1", "phone_number"],
+          "display": [
+            {
+              "name": "Phone Number",
+              "locale": "en-US"
+            }
+          ]
         }
-      }
+      ]
     },
     "displayData": {
       "title": "Verified Phone Number",

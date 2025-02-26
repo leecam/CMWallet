@@ -44,7 +44,7 @@
                         "display_value": "Jon Smith"
                     },
                     "card_number": {
-                        "value": 5466000055552312,
+                        "value": "5466000055552312",
                         "display": "Card Number",
                         "display_value": "**** **** **** 2312"
                     },
@@ -94,7 +94,7 @@
                         "display_value": "Jon Smith"
                     },
                     "card_number": {
-                        "value": 4000123456789012,
+                        "value": "4000123456789012",
                         "display": "Card Number",
                         "display_value": "**** **** **** 9012"
                     },

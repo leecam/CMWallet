@@ -7,13 +7,12 @@ import com.credman.cmwallet.convertDerToRaw
 import java.security.PrivateKey
 import java.security.Signature
 
-fun createSessionTranscript(handover: Any): ByteArray {
-    val sessionTranscript = listOf(
+fun createSessionTranscript(handover: Any): List<Any?> {
+    return listOf(
         null,
         null,
         handover
     )
-    return cborEncode(CborTag(24, cborEncode(sessionTranscript)))
 }
 
 class MDoc(
@@ -152,7 +151,7 @@ fun generateDeviceResponse(
     doctype: String,
     issuerSigned: ByteArray,
     devicePrivateKey: PrivateKey,
-    sessionTranscript: ByteArray,
+    sessionTranscript: List<Any?>,
     deviceNamespaces: Map<String, Any> = emptyMap()
 ): ByteArray {
     val deviceNamespacesTag = CborTag(24, cborEncode(deviceNamespaces))
@@ -161,7 +160,7 @@ fun generateDeviceResponse(
         "DeviceAuthentication",
         sessionTranscript,
         doctype,
-        cborEncode(deviceNamespacesTag)
+        deviceNamespacesTag
     )
 
     val deviceAuthenticationBytes = cborEncode(CborTag(24, cborEncode(deviceAuthentication)))
