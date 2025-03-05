@@ -502,5 +502,139 @@
         "credential": "eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImRjK3NkLWp3dCIsICJ4NWMiOiBbIk1JSUN3RENDQW1lZ0F3SUJBZ0lVSG44Yk1xMVBOTy9rc013SHQ3RGpNNmNMR0Uwd0NnWUlLb1pJemowRUF3SXdlVEVMTUFrR0ExVUVCaE1DVlZNeEV6QVJCZ05WQkFnTUNrTmhiR2xtYjNKdWFXRXhGakFVQmdOVkJBY01EVTF2ZFc1MFlXbHVJRlpwWlhjeEhEQWFCZ05WQkFvTUUwUnBaMmwwWVd3Z1EzSmxaR1Z1ZEdsaGJITXhIekFkQmdOVkJBTU1GbVJwWjJsMFlXeGpjbVZrWlc1MGFXRnNjeTVrWlhZd0hoY05NalV3TWpFNU1qTXpNREU0V2hjTk1qWXdNakU1TWpNek1ERTRXakI1TVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHQTFVRUNBd0tRMkZzYVdadmNtNXBZVEVXTUJRR0ExVUVCd3dOVFc5MWJuUmhhVzRnVm1sbGR6RWNNQm9HQTFVRUNnd1RSR2xuYVhSaGJDQkRjbVZrWlc1MGFXRnNjekVmTUIwR0ExVUVBd3dXWkdsbmFYUmhiR055WldSbGJuUnBZV3h6TG1SbGRqQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJPdDVOaXZpMS9PWHcxQUVmWVBoNDJJczQxVnJOZzlxYU1kWXV3M2NhdmhzQ2ErYVhWME5tVGwyRXNOYUo1R1dtTW9BRDhpa3dBRnN6WWhJZU5nRjQybWpnY3d3Z2Nrd0h3WURWUjBqQkJnd0ZvQVVvay8waWRsOFJ1aHVvNGJaUjBqT3pMN2N6L1V3SFFZRFZSME9CQllFRk4vK2Fsb1M2Y0JpeEx5WXB5WFMyWEQzZW1Bb01EUUdBMVVkSHdRdE1Dc3dLYUFub0NXR0kyaDBkSEJ6T2k4dlpHbG5hWFJoYkMxamNtVmtaVzUwYVdGc2N5NWtaWFl2WTNKc01Db0dBMVVkRWdRak1DR0dIMmgwZEhCek9pOHZaR2xuYVhSaGJDMWpjbVZrWlc1MGFXRnNjeTVrWlhZd0RnWURWUjBQQVFIL0JBUURBZ2VBTUJVR0ExVWRKUUVCL3dRTE1Ba0dCeWlCakYwRkFRSXdDZ1lJS29aSXpqMEVBd0lEUndBd1JBSWdZY1hMOVh6QjQzdnk0TEV6Mmg4Z01RUmRjSnRhSVJRT2VtZ3dtOHNIUXVjQ0lIQ3ZvdUhFbS91bmpCWE1DZVVaN1FSL3ltcGpHeUhJVHcyNS9COUg5UXNDIiwgIk1JSUNrakNDQWptZ0F3SUJBZ0lVSXJsbGdLRVU4cXhTdXBleW5pT1ZzdEFHNFNnd0NnWUlLb1pJemowRUF3SXdlVEVMTUFrR0ExVUVCaE1DVlZNeEV6QVJCZ05WQkFnTUNrTmhiR2xtYjNKdWFXRXhGakFVQmdOVkJBY01EVTF2ZFc1MFlXbHVJRlpwWlhjeEhEQWFCZ05WQkFvTUUwUnBaMmwwWVd3Z1EzSmxaR1Z1ZEdsaGJITXhIekFkQmdOVkJBTU1GbVJwWjJsMFlXeGpjbVZrWlc1MGFXRnNjeTVrWlhZd0hoY05NalV3TWpFNE1UZzBNRFUzV2hjTk16VXdNakEyTVRnME1EVTNXakI1TVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHQTFVRUNBd0tRMkZzYVdadmNtNXBZVEVXTUJRR0ExVUVCd3dOVFc5MWJuUmhhVzRnVm1sbGR6RWNNQm9HQTFVRUNnd1RSR2xuYVhSaGJDQkRjbVZrWlc1MGFXRnNjekVmTUIwR0ExVUVBd3dXWkdsbmFYUmhiR055WldSbGJuUnBZV3h6TG1SbGRqQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJOY0hSSytZMmI5cVB6alNHQUJVUDNJS09KdTUvc1lCQ3VyNnNUVjdBSEliT0cvWWJCUENPV3dBUVFOblRhQldrOHRleTYzTmdPdnA4SXBoQWp1U1ZscWpnWjR3Z1pzd0hRWURWUjBPQkJZRUZLSlA5SW5aZkVib2JxT0cyVWRJenN5KzNNLzFNQjhHQTFVZEl3UVlNQmFBRktKUDlJblpmRWJvYnFPRzJVZEl6c3krM00vMU1CSUdBMVVkRXdFQi93UUlNQVlCQWY4Q0FRQXdEZ1lEVlIwUEFRSC9CQVFEQWdFR01Db0dBMVVkRWdRak1DR0dIMmgwZEhCek9pOHZaR2xuYVhSaGJDMWpjbVZrWlc1MGFXRnNjeTVrWlhZd0NRWURWUjBmQkFJd0FEQUtCZ2dxaGtqT1BRUURBZ05IQURCRUFpQTFzbmFLU3hXU3VRYzQ1YVo1bUJkWUk3T1ZCMXF6QWllbDB2VkFCK2tONmdJZ0twL1Y3SjIrMkFBSVJGZmdleG03KzcyTmFXR0NreWdYV2ZSUHBiSjFlRGs9Il19.eyJfc2QiOiBbIl9zaVptV01fcnlQeDVOQ3o5Y2w1UFZ3MGlXdDhpYU1oOXJJWE5oNlNISHciXSwgImlzcyI6ICJodHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2IiwgImlhdCI6IDE2ODMwMDAwMDAsICJleHAiOiAxODgzMDAwMDAwLCAidmN0IjogInVybjpldS5ldXJvcGEuZWMuZXVkaTpwaWQ6MSIsICJfc2RfYWxnIjogInNoYS0yNTYiLCAiY25mIjogeyJqd2siOiB7Imt0eSI6ICJFQyIsICJjcnYiOiAiUC0yNTYiLCAieCI6ICI1a2MxYUk3YWJlWmxGbHE2aWJkbExZZG9jb21lNm9rVkFFbE5KLW5SRFUwIiwgInkiOiAiV0t0NkRzWDYybzdibllYeXlBMHhrX0ZFZk5TSEVxcFJnUU9WYWFiV0F3MCJ9fX0._BQ4MtsZiVtR3dCR5JLi_zqKH8hOf1JdKV0GIOOH0zUUFvdA87LcKD0YeISaop-jJs2siBRNCYAOZ5blEXP4bA~WyJ5UUs1c0V4MW12MjR2dm95MjZjdjJRIiwgImFnZV9vdmVyXzE4IiwgdHJ1ZV0~"
       }
     ]
+  },
+  {
+    "id": "6",
+    "config": {
+      "format": "mso_mdoc",
+      "doctype": "com.google.wallet.idcard.1",
+      "cryptographic_binding_methods_supported": [
+        "cose_key"
+      ],
+      "credential_signing_alg_values_supported": [
+        "ES256"
+      ],
+      "display": [
+        {
+          "name": "Driver's License",
+          "locale": "en-US",
+          "description": "Mobile Driving License"
+        }
+      ],
+      "claims": [
+        {
+          "path": ["org.iso.18013.5.1", "family_name"],
+          "display": [
+            {
+              "name": "Family Name",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "given_name"],
+          "display": [
+            {
+              "name": "Given Name",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "driving_privileges"],
+          "display": [
+            {
+              "name": "Driving Privs",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "issue_date"],
+          "display": [
+            {
+              "name": "Issue Date",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "expiry_date"],
+          "display": [
+            {
+              "name": "Expiry Date",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "birth_date"],
+          "display": [
+            {
+              "name": "Birth Date",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "document_number"],
+          "display": [
+            {
+              "name": "Document Number",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "issuing_authority"],
+          "display": [
+            {
+              "name": "Issuing Authority",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "issuing_jurisdiction"],
+          "display": [
+            {
+              "name": "Issuing Jurisdiction",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "portrait"],
+          "display": [
+            {
+              "name": "Portrait",
+              "locale": "en-US"
+            }
+          ]
+        },
+        {
+          "path": ["org.iso.18013.5.1", "age_over_21"],
+          "display": [
+            {
+              "name": "Age Over 21",
+              "locale": "en-US"
+            }
+          ]
+        }
+      ]
+    },
+    "displayData": {
+      "title": "Jon's Id Card"
+    },
+    "credentials": [
+      {
+        "key": {
+          "type": "SOFTWARE",
+          "publicKey": "123",
+          "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgNcx6i5_Wxkhlcy2ouLeJY2DEd5O216l2qC4U24zrE1GhRANCAASI5FyXgWOiP9j1mX5sB8WDrz9_AE94-h3Hu3wDGKieTRPvXfIsA5zCX7ueAZFpmLX3z5i6F6Env507A21s8STY"
+        },
+        "credential": "ompuYW1lU3BhY2VzoXFvcmcuaXNvLjE4MDEzLjUuMYPYGFhUpGhkaWdlc3RJRABmcmFuZG9tUISeAjv2QAjPm86he7K38hxxZWxlbWVudElkZW50aWZpZXJrZmFtaWx5X25hbWVsZWxlbWVudFZhbHVlZVNtaXRo2BhYUaRoZGlnZXN0SUQBZnJhbmRvbVDYcvdIzFInJyIx5SW325hncWVsZW1lbnRJZGVudGlmaWVyamdpdmVuX25hbWVsZWxlbWVudFZhbHVlY0pvbtgYWE-kaGRpZ2VzdElEAmZyYW5kb21QY1hIevfxiJy6Sj6n8lQXpnFlbGVtZW50SWRlbnRpZmllcmthZ2Vfb3Zlcl8yMWxlbGVtZW50VmFsdWX1amlzc3VlckF1dGiEQ6EBJqEYIVkCxDCCAsAwggJnoAMCAQICFB5_GzKtTzTv5LDMB7ew4zOnCxhNMAoGCCqGSM49BAMCMHkxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFpbiBWaWV3MRwwGgYDVQQKDBNEaWdpdGFsIENyZWRlbnRpYWxzMR8wHQYDVQQDDBZkaWdpdGFsY3JlZGVudGlhbHMuZGV2MB4XDTI1MDIxOTIzMzAxOFoXDTI2MDIxOTIzMzAxOFoweTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDU1vdW50YWluIFZpZXcxHDAaBgNVBAoME0RpZ2l0YWwgQ3JlZGVudGlhbHMxHzAdBgNVBAMMFmRpZ2l0YWxjcmVkZW50aWFscy5kZXYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATreTYr4tfzl8NQBH2D4eNiLONVazYPamjHWLsN3Gr4bAmvml1dDZk5dhLDWieRlpjKAA_IpMABbM2ISHjYBeNpo4HMMIHJMB8GA1UdIwQYMBaAFKJP9InZfEbobqOG2UdIzsy-3M_1MB0GA1UdDgQWBBTf_mpaEunAYsS8mKcl0tlw93pgKDA0BgNVHR8ELTArMCmgJ6AlhiNodHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2L2NybDAqBgNVHRIEIzAhhh9odHRwczovL2RpZ2l0YWwtY3JlZGVudGlhbHMuZGV2MA4GA1UdDwEB_wQEAwIHgDAVBgNVHSUBAf8ECzAJBgcogYxdBQECMAoGCCqGSM49BAMCA0cAMEQCIGHFy_V8weN78uCxM9ofIDEEXXCbWiEUDnpoMJvLB0LnAiBwr6LhxJv7p4wVzAnlGe0Ef8pqYxshyE8NufwfR_ULAlkBwNgYWQG7pmd2ZXJzaW9uYzEuMG9kaWdlc3RBbGdvcml0aG1nU0hBLTI1Nmdkb2NUeXBleBpjb20uZ29vZ2xlLndhbGxldC5pZGNhcmQuMWx2YWx1ZURpZ2VzdHOhcW9yZy5pc28uMTgwMTMuNS4xowBYIEgjh4XSIQ5QgjNdhZvlEwlLalz-lm_GZs0cDUQnV1PDAVggA7swhebTw5fAVFVdmS2rWiGwAENz7RsJ0eNz5Zx3KLgCWCDJqVZsMxTSiIP6xy-jrpEJ-1hLo7bKjt94nurUFMgMKW1kZXZpY2VLZXlJbmZvoWlkZXZpY2VLZXmkAQIgASFYIIjkXJeBY6I_2PWZfmwHxYOvP38AT3j6Hce7fAMYqJ5NIlggE-9d8iwDnMJfu54BkWmYtffPmLoXoSe_nTsDbWzxJNhsdmFsaWRpdHlJbmZvo2ZzaWduZWTAeBsyMDI1LTAzLTA1VDE5OjU5OjA2LjQ3MjQ3MFppdmFsaWRGcm9twHgbMjAyNS0wMy0wNVQxOTo1OTowNi40NzI0NzdaanZhbGlkVW50aWzAeBsyMDM1LTAyLTIxVDE5OjU5OjA2LjQ3MjQ3OFpYQPQzzNesmbNiaRdBAURE0en6RZ2fJNjrqziYNlsqZhC6M9mNN0vQkpQi-mBF_vvi4JJOywc-Oaa0RN0zkM-vmtw"
+      }
+    ]
   }
 ]
